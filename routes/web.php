@@ -15,7 +15,5 @@ Route::get('/', 'FrontController@home');
 
 Route::resource('app/user', 'UsuarioController');
 
+Route::resource('app/model', 'ModelController');
 
-Route::get('/hola', function () {
-    return "hola heber";
-});

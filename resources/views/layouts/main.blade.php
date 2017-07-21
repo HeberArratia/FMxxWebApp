@@ -171,5 +171,15 @@
 
 {!!Html::script('js/showmodels.js')!!}
 
+<script>
+  $(function(){
+    $('.box-version .box-body').slimScroll({
+        height: '500px',
+        color: '#3C8DBC',
+        size: '10px',
+        alwaysVisible: false
+    });
+});
+</script>
 </body>
 </html>

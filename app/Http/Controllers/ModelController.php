@@ -24,7 +24,7 @@ class ModelController extends Controller
      */
     public function create()
     {
-    	
+    	return view('model.create');
     }
 
 
@@ -50,6 +50,11 @@ class ModelController extends Controller
     public function show( $id )
     {
         
+    }
+
+    public function showtest()
+    {
+        return view('model.show');
     }
 
 

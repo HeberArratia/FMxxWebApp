@@ -17,3 +17,5 @@ Route::resource('app/user', 'UsuarioController');
 
 Route::resource('app/model', 'ModelController');
 
+Route::get('showtest', 'ModelController@showtest');
+

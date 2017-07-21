@@ -13,7 +13,7 @@
 
 Route::get('/', 'FrontController@home');
 
-Route::resource('user', 'UsuarioController');
+Route::resource('app/user', 'UsuarioController');
 
 
 Route::get('/hola', function () {

@@ -38,6 +38,13 @@ class UsuarioController extends Controller
      */
     public function store( Request $request )
     {
+
+        $niceNames = array(
+            'lastname' => 'apellido'
+        );
+
+        $this->validate($request, User::$rules, [], $niceNames);
+
     	User::create([
     		'name' => $request['name'],
     		'lastname' => $request['lastname'],
@@ -45,7 +52,7 @@ class UsuarioController extends Controller
     		'password' => bcrypt($request['password']),
     		'type' => 1,
     	]);
-    	return "listo";   
+    	return redirect('/');  
     }
 
 

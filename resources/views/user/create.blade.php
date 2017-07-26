@@ -36,11 +36,24 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg"><strong>REGISTRAR</strong></p>
+    <h4 class="login-box-msg">REGISTRAR</h4>
+
+    @if(count($errors) > 0)
+      <div class="callout callout-danger">
+          <h4>Error al registrar</h4>
+
+          <ul>
+            @foreach($errors->all() as $error)
+              <li>{!! $error !!}</li>
+            @endforeach
+          </ul>
+        </div>
+    @endif
+    
 
     {!!Form::open(['route'=>'user.store', 'method'=>'POST'])!!}
       <div class="form-group has-feedback">
-        {!!Form::label('Email')!!}
+        {!!Form::label('Correo electrónico')!!}
         {!!Form::email('email', null,['class'=>'form-control'])!!}
       </div>
 

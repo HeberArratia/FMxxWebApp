@@ -16,6 +16,6 @@ class ModelData extends Modelo
     ];
 
     public function models(){
-        return $this->belongsToMany(Modelo::class);
+        return $this->belongsToMany(Model::class);
     }
 }

@@ -85,7 +85,7 @@
     
     <!-- /. forms -->
     <br>
-    <a href="#">Tienes una cuenta? Inicia sesión</a><br>
+    <a href="/app">Tienes una cuenta? Inicia sesión</a><br>
 
   </div>
   <!-- /.login-box-body -->

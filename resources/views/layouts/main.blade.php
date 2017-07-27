@@ -86,7 +86,7 @@
                   <a href="#" class="btn btn-default btn-flat">Configurar</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Cerrar sesión</a>
+                  <a href="/logout" class="btn btn-default btn-flat">Cerrar sesión</a>
                 </div>
               </li>
             </ul>
@@ -104,7 +104,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">Menu principal</li>
 
-        <li class="active"><a href="#"><i class="fa fa-book"></i> <span> Mi Repositorio</span></a></li>
+        <li class="active"><a href="/app/model"><i class="fa fa-book"></i> <span> Mi Repositorio</span></a></li>
 
         <li><a href="#"><i class="fa fa-group"></i> <span> Equpos de trabajo</span></a></li>   
       </ul>

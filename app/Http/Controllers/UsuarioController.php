@@ -69,6 +69,11 @@ class UsuarioController extends Controller
         return redirect('/app')->with('msg', "Los datos son incorrectos");
     }
 
+    public function logout(){
+        Auth::logout();
+        return redirect('/app'); 
+    }
+
     /**
      * Display the specified resource.
      *

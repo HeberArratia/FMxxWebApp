@@ -9,7 +9,7 @@
     <small></small>
   </h1>
   <div class="n-btn pull-right">
-    <button type="button" class="btn btn-block btn-primary"><i class="fa fa-plus"></i> Nuevo modelo</button>
+    <a href="/app/model/create" type="button" class="btn btn-block btn-primary"><i class="fa fa-plus"></i> Nuevo modelo</a>
   </div>
 
  

@@ -18,6 +18,7 @@ Route::get('/', 'FrontController@home');
 Route::resource('app/user', 'UsuarioController');
 Route::get('app', 'UsuarioController@showLogin');
 Route::post('app/user/login', ['as' => 'user.login', 'uses' => 'UsuarioController@login']);
+Route::get('logout', 'UsuarioController@logout');
 
 //MODELO
 Route::resource('app/model', 'ModelController');

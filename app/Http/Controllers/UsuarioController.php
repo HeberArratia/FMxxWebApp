@@ -28,6 +28,9 @@ class UsuarioController extends Controller
      */
     public function create()
     {
+        if (Auth::check()) {
+            return redirect('/app/model');
+        }
     	return view('user.create');
     }
 
@@ -59,6 +62,9 @@ class UsuarioController extends Controller
     }
 
     public function showLogin(){
+        if (Auth::check()) {
+            return redirect('/app/model');
+        }
         return view('user.login');
     }
 

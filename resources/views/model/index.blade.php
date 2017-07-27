@@ -25,6 +25,11 @@
           <div class="row">
             <div class="col-xs-12">
               <!--<h3 class="box-title ">Todos los modelos</h3>-->
+              @if (session('msg'))
+                <div class="callout callout-success">
+                  <p>{!! session('msg') !!}</p>
+                </div>
+              @endif
             </div>
           </div>
         </div>

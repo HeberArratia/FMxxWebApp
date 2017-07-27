@@ -62,7 +62,7 @@ class ModelController extends Controller
 
         $model->model_datas()->attach($modelDataID);
 
-        return "si";
+        return redirect('/app/model')->with('msg', "Se ha creado el modelo correctamente");
     }
 
     /**

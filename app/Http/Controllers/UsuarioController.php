@@ -3,6 +3,9 @@
 namespace FMxx\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use Session;
+use Redirect;
 use FMxx\User;
 
 class UsuarioController extends Controller
@@ -59,6 +62,12 @@ class UsuarioController extends Controller
         return view('user.login');
     }
 
+    public function login(Request $request){
+        if(Auth::attempt(['email' => $request['email'], 'password' => $request['password']])){
+            return redirect('/app/model');
+        }
+        return redirect('/app')->with('msg', "Los datos son incorrectos");
+    }
 
     /**
      * Display the specified resource.

@@ -36,7 +36,13 @@
   <div class="login-box-body">
     <h4 class="login-box-msg">INGRESAR</h4>
 
-    {!! Form::open() !!}
+    @if (session('msg'))
+      <div class="callout callout-danger">
+          <p>{!! session('msg') !!}</p>
+        </div>
+    @endif
+
+    {!! Form::open(['route'=>'user.login', 'method' => 'POST']) !!}
       <div class="form-group has-feedback">
         {!!Form::email('email', null,['class'=>'form-control', 
         'placeholder' => 'Correo electrónico'])!!}

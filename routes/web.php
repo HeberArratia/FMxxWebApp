@@ -14,6 +14,7 @@
 Route::get('/', 'FrontController@home');
 
 Route::resource('app/user', 'UsuarioController');
+Route::get('app', 'UsuarioController@showLogin');
 
 Route::resource('app/model', 'ModelController');
 

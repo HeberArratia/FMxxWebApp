@@ -55,6 +55,10 @@ class UsuarioController extends Controller
     	return redirect('/');  
     }
 
+    public function showLogin(){
+        return view('user.login');
+    }
+
 
     /**
      * Display the specified resource.

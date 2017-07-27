@@ -55,7 +55,7 @@ class UsuarioController extends Controller
     		'password' => bcrypt($request['password']),
     		'type' => 1,
     	]);
-    	return redirect('/');  
+    	return redirect('/app');  
     }
 
     public function showLogin(){

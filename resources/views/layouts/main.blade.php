@@ -67,7 +67,7 @@
               <!-- img pequeña -->
                <img src="{{URL::asset('dist/img/userui.png')}}" alt="profile Pic" class="user-image">
           
-              <span class="hidden-xs">Nombre de usuario reducido</span>
+              <span class="hidden-xs">{!! Auth::user()->name .' '. Auth::user()->lastname !!}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -75,8 +75,8 @@
                 <img src="{{URL::asset('dist/img/userui.png')}}" class="img-circle" alt="User Image">
 
                 <p>
-                  Nombre de usuario
-                  <small>Nick del usuario</small>
+                  {!! Auth::user()->name .' '. Auth::user()->lastname !!}
+                  <small>{!! Auth::user()->email !!}</small>
                 </p>
               </li>
   

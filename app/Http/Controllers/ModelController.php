@@ -21,7 +21,7 @@ class ModelController extends Controller
     public function index()
     {
         $modelDatas = [];
-        $models = Modelo::where('user_id', Auth::id())->get();
+        $models = Modelo::where('user_id', Auth::id())->orderBy('created_at','DESC')->get();
         foreach ($models as $model) {
             array_push($modelDatas, $model->model_datas->last());
         }

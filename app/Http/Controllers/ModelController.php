@@ -3,6 +3,9 @@
 namespace FMxx\Http\Controllers;
 
 use Illuminate\Http\Request;
+use FMxx\Model as Modelo;
+use FMxx\ModelData;
+use Auth;
 
 class ModelController extends Controller
 {
@@ -41,8 +44,20 @@ class ModelController extends Controller
      */
     public function store( Request $request )
     {  
-    }
+        $model = Modelo::create([
+            'user_id' => Auth::id(),
+        ]);
 
+        $modelDataID = ModelData::create([
+            'name' => $request['name'],
+            'des' => $request['des'],
+            'path' => 'pruebapath',
+        ])->id;
+
+        $model->model_datas()->attach($modelDataID);
+
+        return "si";
+    }
 
     /**
      * Display the specified resource.

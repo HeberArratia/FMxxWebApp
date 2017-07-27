@@ -13,7 +13,7 @@ class CreateModelModelDatasTable extends Migration
      */
     public function up()
     {
-        Schema::create('model_model_datas', function (Blueprint $table) {
+        Schema::create('model_model_data', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('model_id')->unsigned()->index();

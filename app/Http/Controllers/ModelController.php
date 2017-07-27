@@ -20,7 +20,13 @@ class ModelController extends Controller
      */
     public function index()
     {
-       return view('model.index');
+        $modelDatas = [];
+        $models = Modelo::where('user_id', Auth::id())->get();
+        foreach ($models as $model) {
+            array_push($modelDatas, $model->model_datas->last());
+        }
+
+        return view('model.index', compact('modelDatas'));
     }
 
 

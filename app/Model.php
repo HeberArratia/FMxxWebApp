@@ -17,4 +17,5 @@ class Model extends Modelo
         return $this->belongsToMany(ModelData::class);
     }
 
+
 }

@@ -49,7 +49,7 @@ class ModelController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store( Request $request )
-    {  
+    {
         $model = Modelo::create([
             'user_id' => Auth::id(),
         ]);
@@ -57,8 +57,10 @@ class ModelController extends Controller
         $modelDataID = ModelData::create([
             'name' => $request['name'],
             'des' => $request['des'],
-            'path' => 'pruebapath',
+            'path' => $request['path']->getClientOriginalName(),
         ])->id;
+
+        \Storage::disk('local')->put($request['path']->getClientOriginalName(), \File::get($request['path']));
 
         $model->model_datas()->attach($modelDataID);
 

@@ -33,6 +33,6 @@ class CreateModelModelDatasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('model_model_datas');
+        Schema::dropIfExists('model_model_data');
     }
 }

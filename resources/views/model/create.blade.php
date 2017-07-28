@@ -21,7 +21,7 @@
         </div>
 
         <div class="box-body">
-          {!!Form::open(['route'=>'model.store', 'method'=>'POST', 'class' => 'form-horizontal'])!!}
+          {!!Form::open(['route'=>'model.store', 'files' => true, 'method'=>'POST', 'class' => 'form-horizontal'])!!}
 
             <div class="form-group has-feedback">
               {!! Form::label('name', 'Nombre:', ['class' => 'col-sm-2 control-label']); !!}

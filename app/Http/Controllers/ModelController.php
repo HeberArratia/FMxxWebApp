@@ -50,6 +50,15 @@ class ModelController extends Controller
      */
     public function store( Request $request )
     {
+
+        $niceNames = array(
+            'name' => 'nombre',
+            'des'  => 'descripción',
+            'path' => 'modelo',
+        );
+
+        $this->validate($request, Modelo::$rules, [], $niceNames);
+
         $model = Modelo::create([
             'user_id' => Auth::id(),
         ]);

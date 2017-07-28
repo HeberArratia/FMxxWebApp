@@ -17,6 +17,10 @@ class Model extends Modelo
         return $this->belongsToMany(ModelData::class);
     }
 
-
+    public static $rules = [
+        'name'  => "required|max:255",
+        'des'   => 'required',
+        'path'  => 'required|image|mimes:jpeg,png,jpg,svg|max:8048',
+    ];
 
 }

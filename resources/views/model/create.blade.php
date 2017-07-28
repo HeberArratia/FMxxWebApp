@@ -21,6 +21,19 @@
         </div>
 
         <div class="box-body">
+
+            @if(count($errors) > 0)
+                <div class="callout callout-danger">
+                    <h4>Error al crear modelo</h4>
+
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{!! $error !!}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
           {!!Form::open(['route'=>'model.store', 'files' => true, 'method'=>'POST', 'class' => 'form-horizontal'])!!}
 
             <div class="form-group has-feedback">
@@ -41,7 +54,7 @@
               {!! Form::label('path', 'Modelo:', ['class' => 'col-sm-2 control-label']); !!}
               <div class="col-sm-10">
                 {!!Form::file('path')!!}
-                <p class="help-block">Subir modelo con extensión...</p>
+                <p class="help-block">Subir modelo con extensión jpeg, png, jpg o svg.</p>
               </div>
             </div>
 
@@ -53,48 +66,6 @@
           {!!Form::close()!!}
 
         </div>
-
-        <!--
-        <form class="form-horizontal">
-          <div class="box-body">
-            <div class="form-group">
-              <label for="" class="col-sm-2 control-label">Nombre:</label>
-
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="" placeholder="Nombre del modelo">
-              </div>
-            </div>
-
- 
-
-            <div class="form-group">
-              <label for="" class="col-sm-2 control-label">Descripción</label>
-
-              <div class="col-sm-10">
-                <textarea class="form-control" rows="3" placeholder="Descripción del modelo"></textarea>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="" class="col-sm-2 control-label">Modelo</label>
-
-              <div class="col-sm-10">
-                <input type="file" id="exampleInputFile">
-
-                <p class="help-block">Subir modelo con extensión...</p>
-              </div>
-            </div>
-
-            
-          </div>
-    
-          <div class="box-footer">
-            <button type="submit" class="btn btn-default">Volver</button>
-            <button type="submit" class="btn btn-primary pull-right">Crear</button>
-          </div>
-
-        </form>
-        -->
         <!-- /.box-body -->
       </div>
     </div>

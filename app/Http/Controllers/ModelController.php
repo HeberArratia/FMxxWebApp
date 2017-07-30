@@ -95,10 +95,13 @@ class ModelController extends Controller
      */
     public function edit( $id )
     {
+        $model = Modelo::find($id);
 
-        $modelData = ModelData::find($id);
+        $modelId = $id;
 
-        return view('model.edit', compact('modelData'));
+        $modelData = $model->model_datas->last();
+
+        return view('model.edit', compact('modelData', 'modelId'));
     }
 
     /**
@@ -109,12 +112,12 @@ class ModelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
 
         $this->validate($request, Modelo::$rules, [], Modelo::$niceNames);
 
-        $model = Modelo::find(0);
+        $model = Modelo::find($id);
 
         $modelDataID = ModelData::create([
             'name' => $request['name'],

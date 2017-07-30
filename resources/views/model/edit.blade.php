@@ -28,7 +28,7 @@
             
             @if(count($errors) > 0)
                 <div class="callout callout-danger">
-                    <h4>Error al crear modelo</h4>
+                    <h4>Error al modificar modelo</h4>
 
                     <ul>
                         @foreach($errors->all() as $error)
@@ -38,7 +38,7 @@
                 </div>
             @endif
 
-          {!! Form::model($modelData, ['method' => 'PUT','url' => ['model', $modelData->id], 'class' => 'form-horizontal']) !!}
+          {!! Form::model($modelData, ['method' => 'PUT','route' => ['model.update', $modelId], 'files' => true, 'class' => 'form-horizontal']) !!}
 
             <div class="form-group has-feedback">
               {!! Form::label('name', 'Nombre:', ['class' => 'col-sm-2 control-label']); !!}

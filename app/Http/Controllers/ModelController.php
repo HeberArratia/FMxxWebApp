@@ -23,10 +23,14 @@ class ModelController extends Controller
         $modelDatas = [];
         $models = Modelo::where('user_id', Auth::id())->orderBy('created_at','DESC')->get();
         foreach ($models as $model) {
-            array_push($modelDatas, $model->model_datas->last());
+            //$newColumn = ["lastData" => $model->model_datas->last(), "model" => $model];
+            $newColumn = $model->model_datas->last();
+            $newColumn['modelCreate'] = $model->created_at;
+            $newColumn['modelId'] = $model->id;
+            array_push($modelDatas, $newColumn);
         }
 
-        return view('model.index', compact('modelDatas'));
+        return view('model.index', compact('modelDatas', 'models'));
     }
 
 
@@ -51,13 +55,7 @@ class ModelController extends Controller
     public function store( Request $request )
     {
 
-        $niceNames = array(
-            'name' => 'nombre',
-            'des'  => 'descripción',
-            'path' => 'modelo',
-        );
-
-        $this->validate($request, Modelo::$rules, [], $niceNames);
+        $this->validate($request, Modelo::$rules, [], Modelo::$niceNames);
 
         $model = Modelo::create([
             'user_id' => Auth::id(),
@@ -85,14 +83,8 @@ class ModelController extends Controller
      */
     public function show( $id )
     {
-        
-    }
-
-    public function showtest()
-    {
         return view('model.show');
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -103,8 +95,10 @@ class ModelController extends Controller
      */
     public function edit( $id )
     {
-        
 
+        $modelData = ModelData::find($id);
+
+        return view('model.edit', compact('modelData'));
     }
 
     /**
@@ -115,9 +109,22 @@ class ModelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request, $id )
+    public function update(Request $request)
     {
-        
+
+        $this->validate($request, Modelo::$rules, [], Modelo::$niceNames);
+
+        $model = Modelo::find(0);
+
+        $modelDataID = ModelData::create([
+            'name' => $request['name'],
+            'des' => $request['des'],
+            'path' => $request['path']->getClientOriginalName(),
+        ])->id;
+
+        $model->model_datas()->attach($modelDataID);
+
+        return redirect('/app/model')->with('msg', "Se ha creado una nueva versión del modelo");
     }    
 
     /**

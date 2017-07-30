@@ -23,4 +23,10 @@ class Model extends Modelo
         'path'  => 'required|image|mimes:jpeg,png,jpg,svg|max:8048',
     ];
 
+    public static $niceNames = [
+        'name' => 'nombre',
+        'des'  => 'descripción',
+        'path' => 'modelo',
+    ];
+
 }

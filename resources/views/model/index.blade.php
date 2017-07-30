@@ -52,15 +52,17 @@
               @foreach($modelDatas as $modelData)
                 <tr>
                   <td><i class="fa fa-sitemap"></i> {{$modelData->name}}</td>
-                  <td>{{$modelData->created_at}}</td>
+                  <td>{{$modelData->modelCreate}}</td>
                   <td>{{$modelData->updated_at}}</td>
                   <td class="">
                     <a class="btn btn-table btn-table-yellow">
                       <i class="fa fa-eye"></i>
                     </a>
-                    <a class="btn btn-table btn-table-blue">
+                  
+                    <a href="{{ url('app/model/'.$modelData->modelId.'/edit') }}" class="btn btn-table btn-table-blue">
                       <i class="fa fa-edit"></i>
                     </a>
+
                     <a class="btn btn-table btn-table-red">
                       <i class="fa fa-trash"></i>
                     </a>

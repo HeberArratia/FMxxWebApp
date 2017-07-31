@@ -36,9 +36,6 @@
         <!-- /.box-header -->
         <div class="box-body">
 
-          
-
-
           <table id="table-main" class="table table-striped table-show">
             <thead>
             <tr>
@@ -55,7 +52,8 @@
                   <td>{{$modelData->modelCreate}}</td>
                   <td>{{$modelData->updated_at}}</td>
                   <td class="">
-                    <a class="btn btn-table btn-table-yellow">
+
+                    <a href="{{ url('app/model/show/'.$modelData->modelId.'/edit') }}" class="btn btn-table btn-table-yellow">
                       <i class="fa fa-eye"></i>
                     </a>
                   

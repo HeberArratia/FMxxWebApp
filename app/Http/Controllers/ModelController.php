@@ -94,9 +94,15 @@ class ModelController extends Controller
         $datas = $model->model_datas->reverse();
 
         $count = $datas->count();
-        
-        $currentData = $datas->find($idDes);
 
+        $currentData = null;
+
+        if ($idDes == 0){
+            $currentData = $datas->first();
+        } else {
+            $currentData = $datas->find($idDes);
+        }
+        
         return view('model.show', compact('model', 'datas', 'currentData', 'count'));
     }
 

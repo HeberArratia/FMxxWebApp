@@ -83,8 +83,23 @@ class ModelController extends Controller
      */
     public function show( $id )
     {
-        return view('model.show');
+
+        return redirect('/app'); 
     }
+
+    public function showModel($idModel, $idDes = 0){
+
+        $model = Modelo::find($idModel);
+
+        $datas = $model->model_datas->reverse();
+
+        $count = $datas->count();
+        
+        $currentData = $datas->find($idDes);
+
+        return view('model.show', compact('model', 'datas', 'currentData', 'count'));
+    }
+
 
     /**
      * Show the form for editing the specified resource.

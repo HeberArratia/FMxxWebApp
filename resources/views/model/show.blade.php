@@ -5,10 +5,10 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Título del modelo
+    {!! $currentData->name !!}
     <small></small>
   </h1>
-  <p>Descripción del modelo</p>
+  <p>{!! $currentData->des !!}</p>
   <div class="acciones-ver">
   
     <a class="btn btn-table btn-table-yellow">
@@ -47,72 +47,14 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-
-	  <strong><a href="">Versión 2</a></strong>
-          <p class="text-muted">
-          	<i class="fa fa-clock-o"></i> 20/02/2016 20:30hrs
-          </p>
-          <hr>
-
-          <strong><a href="">Versión 1</a></strong>
-          <p class="text-muted">
-          	<i class="fa fa-clock-o"></i> 20/02/2016 20:30hrs
-          </p>
-          <hr>
-
-          <strong><a href="">Versión 1</a></strong>
-          <p class="text-muted">
-          	<i class="fa fa-clock-o"></i> 20/02/2016 20:30hrs
-          </p>
-          <hr>
-
-          <strong><a href="">Versión 1</a></strong>
-          <p class="text-muted">
-          	<i class="fa fa-clock-o"></i> 20/02/2016 20:30hrs
-          </p>
-          <hr>
-
-          <strong><a href="">Versión 1</a></strong>
-          <p class="text-muted">
-          	<i class="fa fa-clock-o"></i> 20/02/2016 20:30hrs
-          </p>
-          <hr>
-
-          <strong><a href="">Versión 1</a></strong>
-          <p class="text-muted">
-          	<i class="fa fa-clock-o"></i> 20/02/2016 20:30hrs
-          </p>
-          <hr>
-
-          <strong><a href="">Versión 1</a></strong>
-          <p class="text-muted">
-          	<i class="fa fa-clock-o"></i> 20/02/2016 20:30hrs
-          </p>
-          <hr>
-
-          <strong><a href="">Versión 1</a></strong>
-          <p class="text-muted">
-          	<i class="fa fa-clock-o"></i> 20/02/2016 20:30hrs
-          </p>
-          <hr>
-
-          <strong><a href="">Versión 1</a></strong>
-          <p class="text-muted">
-          	<i class="fa fa-clock-o"></i> 20/02/2016 20:30hrs
-          </p>
-          <hr>
-
-          <strong><a href="">Versión 1</a></strong>
-          <p class="text-muted">
-          	<i class="fa fa-clock-o"></i> 20/02/2016 20:30hrs
-          </p>
-          <hr>
-
-          <strong><a href="">Versión 1</a></strong>
-          <p class="text-muted">
-          	<i class="fa fa-clock-o"></i> 20/02/2016 20:30hrs
-          </p>
-          <hr>
+       
+          @foreach($datas as $data)
+            <strong><a href="">V{!! $count-- !!}: {!! $data->name !!}</a></strong>
+            <p class="text-muted">
+              <i class="fa fa-clock-o"></i> {!! $data->created_at !!}
+            </p>
+            <hr>
+          @endforeach
 
         </div>
         <!-- /.box-body -->

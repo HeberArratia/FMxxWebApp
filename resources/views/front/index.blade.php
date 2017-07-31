@@ -38,7 +38,7 @@
             <li><a href="#descarga">DESCARGA</a></li>
             <li><a href="#team">EQUIPO</a></li>
             <li><a href="#contact">CONTACTO</a></li>
-            <li><a id="visor" href="contacto.html">FMxx VISOR</a></li>
+            <li><a id="visor" href="/app">FMxx VISOR</a></li>
           </ul>
         </nav>
       </div>

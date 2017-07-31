@@ -22,7 +22,6 @@ Route::get('logout', 'UsuarioController@logout');
 
 //MODELO
 Route::resource('app/model', 'ModelController');
+Route::get('/app/model/show/{idModel}/{idDes?}', 'ModelController@showModel');
 
-//PRUEBAS
-Route::get('showtest', 'ModelController@showtest');
 

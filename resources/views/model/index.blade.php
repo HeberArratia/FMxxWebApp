@@ -61,7 +61,7 @@
                       <i class="fa fa-edit"></i>
                     </a>
 
-                    <a class="btn btn-table btn-table-red">
+                    <a class="btn btn-table btn-table-red" onclick="deleteModel({!! $modelData->modelId !!}, '{!! $modelData->name !!}')">
                       <i class="fa fa-trash"></i>
                     </a>
                     <button class="btn btn-table btn-table-green" data-toggle="modal" data-target="#modal-primary">
@@ -82,7 +82,6 @@
   </div>
 
 </section>
-
 
   <div class="modal fade moda-share" id="modal-primary">
     <div class="modal-dialog">
@@ -174,6 +173,25 @@
     </div>
     <!-- /.modal-dialog -->
   </div>
+  <!-- /.modal -->
+
+  <script>
+    function deleteModel(modelId, modelName){
+      //swal("Es: " + modelId);
+      swal({
+        title: "Estas seguro?",
+        text: "Se va a eliminar " + modelName + " y todas sus versiones de manera permanente",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Si, eliminalo!",
+        closeOnConfirm: false
+      },
+      function(){
+        alert("post para eliminar");
+      });
+    }
+  </script>
   <!-- /.modal -->
 
 <!-- /.content -->  

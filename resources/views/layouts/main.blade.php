@@ -14,7 +14,9 @@
   <!-- Ionicons -->
   {!!Html::style('bower_components/Ionicons/css/ionicons.min.css')!!}
 
-  
+  <!-- sweetalert -->
+  {!!Html::style('css/sweetalert.css')!!}
+
    <!-- DataTables -->
    {!!Html::style('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')!!}
   
@@ -170,6 +172,8 @@
 {!!Html::script('dist/js/demo.js')!!}
 
 {!!Html::script('js/showmodels.js')!!}
+<!-- sweetalerts -->
+{!!Html::script('js/sweetalert.min.js')!!}
 
 <script>
   $(function(){

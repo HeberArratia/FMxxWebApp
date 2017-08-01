@@ -57,6 +57,8 @@ class ModelController extends Controller
 
         $this->validate($request, Modelo::$rules, [], Modelo::$niceNames);
 
+        $nameImg = time().'-'.$request['path']->getClientOriginalName();
+
         $model = Modelo::create([
             'user_id' => Auth::id(),
         ]);
@@ -64,10 +66,10 @@ class ModelController extends Controller
         $modelDataID = ModelData::create([
             'name' => $request['name'],
             'des' => $request['des'],
-            'path' => $request['path']->getClientOriginalName(),
+            'path' => $nameImg,
         ])->id;
 
-        \Storage::disk('local')->put($request['path']->getClientOriginalName(), \File::get($request['path']));
+        \Storage::disk('local')->put($nameImg, \File::get($request['path']));
 
         $model->model_datas()->attach($modelDataID);
 
@@ -138,13 +140,17 @@ class ModelController extends Controller
 
         $this->validate($request, Modelo::$rules, [], Modelo::$niceNames);
 
+        $nameImg = time().'-'.$request['path']->getClientOriginalName();
+
         $model = Modelo::find($id);
 
         $modelDataID = ModelData::create([
             'name' => $request['name'],
             'des' => $request['des'],
-            'path' => $request['path']->getClientOriginalName(),
+            'path' => $nameImg,
         ])->id;
+
+        \Storage::disk('local')->put($nameImg, \File::get($request['path']));
 
         $model->model_datas()->attach($modelDataID);
 

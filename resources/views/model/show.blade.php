@@ -3,6 +3,12 @@
 @section('content')
 
 <!-- Content Header (Page header) -->
+<style>
+  .img-show-data{
+    width: 100%;
+    height: auto;
+  }
+</style>
 <section class="content-header">
   <h1>
     {!! $currentData->name !!}
@@ -31,7 +37,7 @@
   <div class="row">
     <div class="col-md-8">
       <div class="box">
-        <img class="img-center" src="https://www.gliffy.com/_media/diagram_cache/4218693_L.png" alt="">
+        <img class="img-center img-show-data" src="/models/{{ $currentData->path }}" alt="">
       </div>
     </div>
     <!-- /.col -->

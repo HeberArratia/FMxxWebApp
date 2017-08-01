@@ -166,6 +166,6 @@ class ModelController extends Controller
      */
     public function destroy( $id )
     {
-
+        return response()->json(["msg" => "una cosa yo sé, tu id: ".$id]);
     }
 }

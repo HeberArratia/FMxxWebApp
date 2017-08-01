@@ -36,6 +36,8 @@
         <!-- /.box-header -->
         <div class="box-body">
 
+          <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+
           <table id="table-main" class="table table-striped table-show">
             <thead>
             <tr>
@@ -188,7 +190,16 @@
         closeOnConfirm: false
       },
       function(){
-        alert("post para eliminar");
+
+        $.ajax({
+          url: 'model/' + modelId,
+          headers: {'X-CSRF-TOKEN': $('#token').val()},
+          type: 'DELETE',
+          success: function(result) {
+             console.log(result);
+          }
+        });
+
       });
     }
   </script>

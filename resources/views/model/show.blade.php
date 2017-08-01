@@ -53,7 +53,7 @@
         <div class="box-body">
        
           @foreach($datas as $data)
-            <strong><a href="">V{!! $count-- !!}: {!! $data->name !!}</a></strong>
+            <strong><a href="{{ url('app/model/show/'.$model->id.'/'.$data->id) }}">V{!! $count-- !!}: {!! $data->name !!}</a></strong>
             <p class="text-muted">
               <i class="fa fa-clock-o"></i> {!! $data->created_at !!}
             </p>

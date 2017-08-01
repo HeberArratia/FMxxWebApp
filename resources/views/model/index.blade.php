@@ -53,7 +53,7 @@
                   <td>{{$modelData->updated_at}}</td>
                   <td class="">
 
-                    <a href="{{ url('app/model/show/'.$modelData->modelId.'/edit') }}" class="btn btn-table btn-table-yellow">
+                    <a href="{{ url('app/model/show/'.$modelData->modelId) }}" class="btn btn-table btn-table-yellow">
                       <i class="fa fa-eye"></i>
                     </a>
                   

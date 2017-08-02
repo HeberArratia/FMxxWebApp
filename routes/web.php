@@ -20,6 +20,9 @@ Route::get('app', 'UsuarioController@showLogin');
 Route::post('app/user/login', ['as' => 'user.login', 'uses' => 'UsuarioController@login']);
 Route::get('logout', 'UsuarioController@logout');
 
+//TEAM
+Route::resource('app/team', 'TeamController');
+
 //MODELO
 Route::resource('app/model', 'ModelController');
 Route::get('/app/model/show/{idModel}/{idDes?}', 'ModelController@showModel');

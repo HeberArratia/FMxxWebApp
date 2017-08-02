@@ -108,7 +108,7 @@
 
         <li class="active"><a href="/app/model"><i class="fa fa-book"></i> <span> Mi Repositorio</span></a></li>
 
-        <li><a href="#"><i class="fa fa-group"></i> <span> Equpos de trabajo</span></a></li>   
+        <li><a href="/app/team"><i class="fa fa-group"></i> <span> Equpos de trabajo</span></a></li>   
       </ul>
     </section>
     <!-- /.sidebar -->

@@ -199,6 +199,7 @@
              console.log(result);
           }
         });
+        window.location.replace("model");
 
       });
     }

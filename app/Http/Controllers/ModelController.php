@@ -166,6 +166,18 @@ class ModelController extends Controller
      */
     public function destroy( $id )
     {
+        $model = Modelo::find($id);
+
+        $datas = $model->model_datas;
+
+        foreach ($datas as $data) {
+            $data->delete();
+        }
+
+        $model->model_datas()->detach();
+        
+        $model->destroy($id);
+
         return response()->json(["msg" => "una cosa yo sé, tu id: ".$id]);
     }
 }

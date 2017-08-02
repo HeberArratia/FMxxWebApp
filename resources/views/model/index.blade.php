@@ -196,11 +196,9 @@
           headers: {'X-CSRF-TOKEN': $('#token').val()},
           type: 'DELETE',
           success: function(result) {
-             console.log(result);
+              window.location.replace("model");
           }
         });
-        window.location.replace("model");
-
       });
     }
   </script>

@@ -8,6 +8,20 @@
     width: 100%;
     height: auto;
   }
+  .select-version{
+    border-left: 4px solid steelblue;
+  }
+  .card-version{
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 8px;
+  }
+  .card-version p{
+    margin: 0;
+  }
+  hr{
+    margin: 0;
+  }
 </style>
 <section class="content-header">
   <h1>
@@ -53,10 +67,12 @@
         <div class="box-body">
        
           @foreach($datas as $data)
-            <strong><a href="{{ url('app/model/show/'.$model->id.'/'.$data->id) }}">V{!! $count-- !!}: {!! $data->name !!}</a></strong>
-            <p class="text-muted">
-              <i class="fa fa-clock-o"></i> {!! $data->created_at !!}
-            </p>
+            <div class="card-version {{ $currentData->id == $data->id ? 'select-version' : ''}}">
+              <strong><a href="{{ url('app/model/show/'.$model->id.'/'.$data->id) }}">V{!! $count-- !!}: {!! $data->name !!}</a></strong>
+              <p class="text-muted">
+                <i class="fa fa-clock-o"></i> {!! $data->created_at !!}
+              </p>
+            </div>
             <hr>
           @endforeach
 

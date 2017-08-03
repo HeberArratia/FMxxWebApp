@@ -8,7 +8,7 @@
     Equipos de trabajo
   </h1>
   <div class="n-btn pull-right">
-    <a href="/app/model/create" type="button" class="btn btn-block btn-primary"><i class="fa fa-plus"></i> Nuevo equipo</a>
+    <a href="/app/team/create" type="button" class="btn btn-block btn-primary"><i class="fa fa-plus"></i> Nuevo equipo</a>
   </div>
 
  

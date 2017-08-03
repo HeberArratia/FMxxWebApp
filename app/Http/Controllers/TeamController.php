@@ -4,6 +4,7 @@ namespace FMxx\Http\Controllers;
 
 use Illuminate\Http\Request;
 use FMxx\Team;
+use Auth;
 
 class TeamController extends Controller
 {
@@ -14,8 +15,8 @@ class TeamController extends Controller
      */
     public function index()
     {
-       
-       return view('team.index');
+       $teams = Team::all();	
+       return view('team.index', compact('teams'));
     }
 
     /**
@@ -34,6 +35,14 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $this->validate($request, Team::$rules, [], Team::$niceNames);
+
+        $team = Team::create([
+            'user_id'   => Auth::id(),
+            'name'      => $request['name'],
+            'des'       => $request['des'],
+        ]);
+
+        return redirect('/app/team/');
     }
 }

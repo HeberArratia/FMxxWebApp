@@ -15,6 +15,7 @@ class TeamController extends Controller
      */
     public function index()
     {
+       //CAMBIAR: listar solo los que pertenecen al usuario 
        $teams = Team::all();	
        return view('team.index', compact('teams'));
     }
@@ -43,6 +44,6 @@ class TeamController extends Controller
             'des'       => $request['des'],
         ]);
 
-        return redirect('/app/team/');
+        return redirect('/app/team/')->with('msg', "Se ha creado el equipo correctamente");
     }
 }

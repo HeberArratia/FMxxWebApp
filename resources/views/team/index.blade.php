@@ -42,6 +42,7 @@
           <div class="row">
             <div class="col-xs-12">
               @if (session('msg'))
+                </br>
                 <div class="callout callout-success">
                   <p>{!! session('msg') !!}</p>
                 </div>

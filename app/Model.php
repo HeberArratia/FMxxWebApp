@@ -4,6 +4,7 @@ namespace FMxx;
 
 use Illuminate\Database\Eloquent\Model as Modelo;
 use FMxx\ModelData;
+use FMxx\Team;
 
 class Model extends Modelo
 {
@@ -15,6 +16,10 @@ class Model extends Modelo
 
     public function model_datas(){
         return $this->belongsToMany(ModelData::class);
+    }
+
+    public function teams(){
+        return $this->belongsToMany(Team::class);
     }
 
     public static $rules = [

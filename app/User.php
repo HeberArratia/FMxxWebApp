@@ -4,6 +4,7 @@ namespace FMxx;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use FMxx\Team;
 
 class User extends Authenticatable
 {
@@ -26,6 +27,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function teams(){
+        return $this->belongsToMany(Team::class);
+    }
 
     public static $rules = [
         'email'     => 'required|max:150|unique:users',

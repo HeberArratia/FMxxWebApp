@@ -66,7 +66,7 @@
                     <a class="btn btn-table btn-table-red" onclick="deleteModel({!! $modelData->modelId !!}, '{!! $modelData->name !!}')">
                       <i class="fa fa-trash"></i>
                     </a>
-                    <button class="btn btn-table btn-table-green" data-toggle="modal" data-target="#modal-primary">
+                    <button class="btn btn-table btn-table-green" onclick="editTeams('{!! $modelData->name !!}')" data-toggle="modal" data-target="#modal-primary">
                       <i class="fa fa-group"></i>
                     </button>
                   </td>
@@ -96,79 +96,19 @@
         <div class="modal-body">
          
            
-           <form class="form-horizontal">
-              <label for="" class="control-label">Nombre:</label>
-              <div class="form-group">
-                
+           <form class="">
+              <p><strong for="" class="control-label">Equipos:</strong></p>
 
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="" placeholder="Nombre del equipo">
-                </div>
-                <div class="col-sm-2">
-                   <button type="submit" class="btn btn-primary pull-right">Compartir</button>
-                </div>
+              <div class="form-group">
+                  <input id="input-update" type="text" class="form-control" id="" placeholder="Ingrese un nombre de equipo">
               </div>
 
           </form>
 
-          <h3>Compartido en:</h3>
-          <div class="team-share-content">
-            <div class="team-share">
-              <span>Nombre equipo Nombre equipo 22</span>
-              <button class="btn btn-table btn-table-red">
-                <i class="fa fa-trash"></i>
-              </button>
-            </div>
-
-            <div class="team-share">
-              <span>Nombre equipo</span>
-              <button class="btn btn-table btn-table-red">
-                <i class="fa fa-trash"></i>
-              </button>
-            </div>
-
-            <div class="team-share">
-              <span>Nombre equipo</span>
-              <button class="btn btn-table btn-table-red">
-                <i class="fa fa-trash"></i>
-              </button>
-            </div>
-
-            <div class="team-share">
-              <span>Nombre equipo</span>
-              <button class="btn btn-table btn-table-red">
-                <i class="fa fa-trash"></i>
-              </button>
-            </div>
-
-            <div class="team-share">
-              <span>Nombre equipo</span>
-              <button class="btn btn-table btn-table-red">
-                <i class="fa fa-trash"></i>
-              </button>
-            </div>
-
-            <div class="team-share">
-              <span>Nombre equipo</span>
-              <button class="btn btn-table btn-table-red">
-                <i class="fa fa-trash"></i>
-              </button>
-            </div>
-
-            <div class="team-share">
-              <span>Nombre equipo</span>
-              <button class="btn btn-table btn-table-red">
-                <i class="fa fa-trash"></i>
-              </button>
-            </div>
-          </div>
-
-
-
         </div>
         <div class="modal-footer">
            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary">Guardar</button>
+            <button type="button" class="btn btn-primary" onclick="updateTeams()">Guardar</button>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -178,6 +118,28 @@
   <!-- /.modal -->
 
   <script>
+
+   var nameModel = '';
+
+   function editTeams(name){
+      nameModel = name;
+      console.log(nameModel);
+      $('.change').html(nameModel);
+   } 
+
+   function updateTeams(){
+      var valueEdit = $('#input-update').val();
+
+      $.ajax({
+          url: 'model/teams/' + valueEdit,
+          headers: {'X-CSRF-TOKEN': $('#token').val()},
+          type: 'POST',
+          success: function(result) {
+              console.log(result);
+          }
+      });
+   }
+
     function deleteModel(modelId, modelName){
       //swal("Es: " + modelId);
       swal({

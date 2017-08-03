@@ -2,7 +2,7 @@ $(function () {
     var table = $('#table-main').DataTable({
         "ordering": false,
         "language": {
-            "lengthMenu": "Mostrar _MENU_ modelos por página",
+            "lengthMenu": "Mostrar _MENU_ registros por página",
             "zeroRecords": "No se ha encontrado nada",
             "info": "Mostrar página _PAGE_ de _PAGES_",
             "infoEmpty": "No hay registros disponibles",

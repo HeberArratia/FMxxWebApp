@@ -65,10 +65,10 @@
             </tr>
             </thead>
             <tbody>
-             
+                @foreach($teams as $team)
                 <tr>
-                  <td><i class="fa fa-group"></i> dsad</td>
-                  <td>adsd</td>
+                  <td><i class="fa fa-group"></i> {{ $team->name }}</td>
+                  <td>{{ $team ->des }}  </td>
                   <td>adasd</td>
                   <td class="">
 
@@ -90,7 +90,7 @@
                     </a>
                   </td>
                 </tr>
-        
+              @endforeach
             </tbody>
             
           </table>

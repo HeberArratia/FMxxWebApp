@@ -16,6 +16,8 @@
 
   <!-- sweetalert -->
   {!!Html::style('css/sweetalert.css')!!}
+  <!-- select2 -->
+  {!!Html::style('css/select2.css')!!}
 
    <!-- DataTables -->
    {!!Html::style('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')!!}
@@ -174,6 +176,9 @@
 {!!Html::script('js/showmodels.js')!!}
 <!-- sweetalerts -->
 {!!Html::script('js/sweetalert.min.js')!!}
+<!-- select2 -->
+{!!Html::script('js/select2.min.js')!!}
+
 
 <script>
   $(function(){

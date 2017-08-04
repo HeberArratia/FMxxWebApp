@@ -66,7 +66,7 @@
                     <a class="btn btn-table btn-table-red" onclick="deleteModel({!! $modelData->modelId !!}, '{!! $modelData->name !!}')">
                       <i class="fa fa-trash"></i>
                     </a>
-                    <button class="btn btn-table btn-table-green" onclick="editTeams('{!! $modelData->name !!}')" data-toggle="modal" data-target="#modal-primary">
+                    <button class="btn btn-table btn-table-green" onclick="editTeams('{!! $modelData->name !!}', {!! $modelData->modelId !!})" data-toggle="modal" data-target="#modal-primary">
                       <i class="fa fa-group"></i>
                     </button>
                   </td>
@@ -100,7 +100,12 @@
               <p><strong for="" class="control-label">Equipos:</strong></p>
 
               <div class="form-group">
-                  <input id="input-update" type="text" class="form-control" id="" placeholder="Ingrese un nombre de equipo">
+                <select class="form-control" id="input-update" multiple="multiple" style="width: 100%">
+                  <option selected value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
               </div>
 
           </form>
@@ -120,18 +125,25 @@
   <script>
 
    var nameModel = '';
+   var idModel = '';
 
-   function editTeams(name){
+   function editTeams(name, id){
       nameModel = name;
-      console.log(nameModel);
+      idModel = id;
       $('.change').html(nameModel);
+      $('#input-update').select2({
+        allowClear: true
+      });
    } 
 
    function updateTeams(){
       var valueEdit = $('#input-update').val();
-
+      console.log(valueEdit);
+      console.log(idModel);
+      
       $.ajax({
-          url: 'model/teams/' + valueEdit,
+          url: 'model/teams/' + idModel,
+          data: {teams: valueEdit},
           headers: {'X-CSRF-TOKEN': $('#token').val()},
           type: 'POST',
           success: function(result) {
@@ -163,6 +175,7 @@
         });
       });
     }
+
   </script>
   <!-- /.modal -->
 

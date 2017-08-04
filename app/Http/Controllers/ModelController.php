@@ -181,7 +181,7 @@ class ModelController extends Controller
         return response()->json(["msg" => "una cosa yo sé, tu id: ".$id]);
     }
 
-    public function updateTeams($id){
-        return response()->json(["msg" => "una cosa yo sé, tu id: ".$id]);
+    public function updateTeams(Request $request, $id){
+        return response()->json(["msg" => "una cosa yo sé, tu id: ".$id, "teams" => json_encode($request['teams']) ]);
     }
 }

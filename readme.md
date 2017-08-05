@@ -11,7 +11,3 @@ Presenta un modelamiento de la variabilidad en lineas de producto de software us
 ## Apoya
 
 El proyecto se mantiene a través de el Departamento de Computación e Informática de la Universidad de La Frontera.
-
-## License
-
-Código abierto.

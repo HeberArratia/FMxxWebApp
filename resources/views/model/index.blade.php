@@ -101,10 +101,9 @@
 
               <div class="form-group">
                 <select class="form-control" id="input-update" multiple="multiple" style="width: 100%">
-                  <option selected value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
+                  @foreach($teams as $team)
+                    <option selected value="{{ $team->id }}">{{ $team->name }}</option>
+                  @endforeach
                 </select>
               </div>
 
@@ -131,9 +130,7 @@
       nameModel = name;
       idModel = id;
       $('.change').html(nameModel);
-      $('#input-update').select2({
-        allowClear: true
-      });
+      $('#input-update').select2();
    } 
 
    function updateTeams(){

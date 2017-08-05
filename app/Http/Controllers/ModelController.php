@@ -5,6 +5,7 @@ namespace FMxx\Http\Controllers;
 use Illuminate\Http\Request;
 use FMxx\Model as Modelo;
 use FMxx\ModelData;
+use FMxx\Team;
 use Auth;
 
 class ModelController extends Controller
@@ -30,7 +31,9 @@ class ModelController extends Controller
             array_push($modelDatas, $newColumn);
         }
 
-        return view('model.index', compact('modelDatas', 'models'));
+        $teams = Team::all();   
+
+        return view('model.index', compact('modelDatas', 'models', 'teams'));
     }
 
 
@@ -182,6 +185,11 @@ class ModelController extends Controller
     }
 
     public function updateTeams(Request $request, $id){
+
+        $model = Modelo::find($id);
+
+        $model->teams()->attach(3);
+
         return response()->json(["msg" => "una cosa yo sé, tu id: ".$id, "teams" => json_encode($request['teams']) ]);
     }
 }

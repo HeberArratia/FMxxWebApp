@@ -13,7 +13,7 @@ class CreateModelTeamsTable extends Migration
      */
     public function up()
     {
-        Schema::create('model_teams', function (Blueprint $table) {
+        Schema::create('model_team', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('model_id')->unsigned()->index();

@@ -201,8 +201,16 @@ class ModelController extends Controller
 
         $model = Modelo::find($id);
 
-        $model->teams()->attach(2);
+        $teams = $request['teams'];
 
-        return response()->json(["msg" => "una cosa yo sé, tu id: ".$id, "teams" => json_encode($request['teams']) ]);
+        $model->teams()->detach();
+
+        if ($teams != null){
+            foreach ($teams as $team) {
+                $model->teams()->attach($team);
+            }    
+        }
+
+        return response()->json(["msg" => "realizado  !!"]);
     }
 }

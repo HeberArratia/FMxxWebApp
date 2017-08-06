@@ -130,11 +130,6 @@
       nameModel = name;
       idModel = id;
 
-      /*$('#input-update').each(function(){
-          $(this).removeAttr('selected');
-          
-      });*/
-
       $.ajax({
           url: 'model/teams/' + idModel,
           headers: {'X-CSRF-TOKEN': $('#token').val()},
@@ -151,8 +146,6 @@
 
    function updateTeams(){
       var valueEdit = $('#input-update').val();
-      console.log(valueEdit);
-      console.log(idModel);
       
       $.ajax({
           url: 'model/teams/' + idModel,
@@ -160,7 +153,8 @@
           headers: {'X-CSRF-TOKEN': $('#token').val()},
           type: 'POST',
           success: function(result) {
-              console.log(result);
+              swal("Realizado!", "Se ha compartido el modelo en los grupos indicados", "success")
+              $('#modal-primary').modal('hide');
           }
       });
    }

@@ -177,6 +177,8 @@ class ModelController extends Controller
             $data->delete();
         }
 
+        $model->teams()->detach();
+
         $model->model_datas()->detach();
         
         $model->destroy($id);

@@ -66,7 +66,7 @@
                     <a class="btn btn-table btn-table-red" onclick="deleteModel({!! $modelData->modelId !!}, '{!! $modelData->name !!}')">
                       <i class="fa fa-trash"></i>
                     </a>
-                    <button class="btn btn-table btn-table-green" onclick="editTeams('{!! $modelData->name !!}', {!! $modelData->modelId !!})" data-toggle="modal" data-target="#modal-primary">
+                    <button class="btn btn-table btn-table-green" onclick="editTeams('{!! $modelData->name !!}', {!! $modelData->modelId !!})">
                       <i class="fa fa-group"></i>
                     </button>
                   </td>
@@ -102,7 +102,7 @@
               <div class="form-group">
                 <select class="form-control" id="input-update" multiple="multiple" style="width: 100%">
                   @foreach($teams as $team)
-                    <option selected value="{{ $team->id }}">{{ $team->name }}</option>
+                    <option value="{{ $team->id }}">{{ $team->name }}</option>
                   @endforeach
                 </select>
               </div>
@@ -129,9 +129,25 @@
    function editTeams(name, id){
       nameModel = name;
       idModel = id;
-      $('.change').html(nameModel);
-      $('#input-update').select2();
+
+      /*$('#input-update').each(function(){
+          $(this).removeAttr('selected');
+          
+      });*/
+
+      $.ajax({
+          url: 'model/teams/' + idModel,
+          headers: {'X-CSRF-TOKEN': $('#token').val()},
+          type: 'GET',
+          success: function(result) {
+              $("#input-update").val(result.ids);
+              $('#input-update').select2();
+              $('#modal-primary').modal('show');
+          }
+      });
+    
    } 
+
 
    function updateTeams(){
       var valueEdit = $('#input-update').val();

@@ -27,5 +27,7 @@ Route::resource('app/team', 'TeamController');
 Route::resource('app/model', 'ModelController');
 Route::get('/app/model/show/{idModel}/{idDes?}', 'ModelController@showModel');
 Route::post('/app/model/teams/{idModel}', 'ModelController@updateTeams');
+Route::get('/app/model/teams/{idModel}', 'ModelController@getTeamsFromModel');
+
 
 

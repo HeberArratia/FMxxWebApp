@@ -184,11 +184,22 @@ class ModelController extends Controller
         return response()->json(["msg" => "una cosa yo sé, tu id: ".$id]);
     }
 
+    public function getTeamsFromModel($id){
+        $ids = [];
+        $teams = Modelo::find($id)->teams;
+
+        foreach ($teams as $team) {
+            array_push($ids, $team->id);
+        }
+
+        return response()->json(["ids" => $ids]);
+    }
+
     public function updateTeams(Request $request, $id){
 
         $model = Modelo::find($id);
 
-        $model->teams()->attach(3);
+        $model->teams()->attach(2);
 
         return response()->json(["msg" => "una cosa yo sé, tu id: ".$id, "teams" => json_encode($request['teams']) ]);
     }

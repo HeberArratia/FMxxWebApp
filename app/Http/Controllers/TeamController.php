@@ -46,4 +46,15 @@ class TeamController extends Controller
 
         return redirect('/app/team/')->with('msg', "Se ha creado el equipo correctamente");
     }
+
+    public function getUsersFromTeam($id){
+        $ids = [];
+        $users = Team::find($id)->users;
+
+        foreach ($users as $user) {
+            array_push($ids, $user->id);
+        }
+
+        return response()->json(["ids" => $ids]);
+    }
 }

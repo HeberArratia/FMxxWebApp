@@ -72,20 +72,20 @@
                   <td>adasd</td>
                   <td class="">
 
-                    <a href="{{ url('app/model/show/') }}" class="btn btn-table btn-table-yellow">
+                    <a href="{{ url('app/team/show/') }}" class="btn btn-table btn-table-yellow">
                       <i class="fa fa-eye"></i>
                     </a>
                   
-                    <a href="{{ url('app/model/'.'algo'.'/edit') }}" class="btn btn-table btn-table-blue">
+                    <a href="{{ url('app/team/'.'algo'.'/edit') }}" class="btn btn-table btn-table-blue">
                       <i class="fa fa-edit"></i>
                     </a>
 
-                    <a class="btn btn-table btn-table-green" onclick="deleteModel()">
+                    <button class="btn btn-table btn-table-green" onclick="editUsers('{!! $team->name !!}', {!! $team->id !!})">
                       <i class="fa fa-user-plus"></i>
-                    </a>
+                    </button>
              
 
-                    <a class="btn btn-table btn-table-red" onclick="deleteModel()">
+                    <a class="btn btn-table btn-table-red" onclick="deleteTeam()">
                       <i class="fa fa-trash"></i>
                     </a>
                   </td>
@@ -110,79 +110,22 @@
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Compartir en equipo de trabajo</h4>
+          <h4 class="modal-title">Agregar usuarios al grupo</h4>
         </div>
         <div class="modal-body">
          
-           
-           <form class="form-horizontal">
-              <label for="" class="control-label">Nombre:</label>
-              <div class="form-group">
-                
+           <form class="">
+              <p><strong for="" class="control-label">Usuarios:</strong></p>
 
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="" placeholder="Nombre del equipo">
-                </div>
-                <div class="col-sm-2">
-                   <button type="submit" class="btn btn-primary pull-right">Compartir</button>
-                </div>
+              <div class="form-group">
+                <select class="form-control" id="input-update" multiple="multiple" style="width: 100%">
+                  @foreach($teams as $team)
+                    <option value="{{ $team->id }}">{{ $team->name }}</option>
+                  @endforeach
+                </select>
               </div>
 
           </form>
-
-          <h3>Compartido en:</h3>
-          <div class="team-share-content">
-            <div class="team-share">
-              <span>Nombre equipo Nombre equipo 22</span>
-              <button class="btn btn-table btn-table-red">
-                <i class="fa fa-trash"></i>
-              </button>
-            </div>
-
-            <div class="team-share">
-              <span>Nombre equipo</span>
-              <button class="btn btn-table btn-table-red">
-                <i class="fa fa-trash"></i>
-              </button>
-            </div>
-
-            <div class="team-share">
-              <span>Nombre equipo</span>
-              <button class="btn btn-table btn-table-red">
-                <i class="fa fa-trash"></i>
-              </button>
-            </div>
-
-            <div class="team-share">
-              <span>Nombre equipo</span>
-              <button class="btn btn-table btn-table-red">
-                <i class="fa fa-trash"></i>
-              </button>
-            </div>
-
-            <div class="team-share">
-              <span>Nombre equipo</span>
-              <button class="btn btn-table btn-table-red">
-                <i class="fa fa-trash"></i>
-              </button>
-            </div>
-
-            <div class="team-share">
-              <span>Nombre equipo</span>
-              <button class="btn btn-table btn-table-red">
-                <i class="fa fa-trash"></i>
-              </button>
-            </div>
-
-            <div class="team-share">
-              <span>Nombre equipo</span>
-              <button class="btn btn-table btn-table-red">
-                <i class="fa fa-trash"></i>
-              </button>
-            </div>
-          </div>
-
-
 
         </div>
         <div class="modal-footer">
@@ -197,7 +140,41 @@
   <!-- /.modal -->
 
   <script>
+    var nameTeam = '';
+    var idTeam = '';
+
+   function editUsers(name, id){
+      nameTeam = name;
+      idTeam = id;
+
+      $.ajax({
+          url: 'team/users/' + idTeam,
+          headers: {'X-CSRF-TOKEN': $('#token').val()},
+          type: 'GET',
+          success: function(result) {
+              $("#input-update").val(result.ids);
+              $('#input-update').select2();
+              $('#modal-primary').modal('show');
+          }
+      });
     
+   } 
+
+
+   function updateUsers(){
+      var valueEdit = $('#input-update').val();
+      
+      $.ajax({
+          url: 'team/users/' + idTeam,
+          data: {teams: valueEdit},
+          headers: {'X-CSRF-TOKEN': $('#token').val()},
+          type: 'POST',
+          success: function(result) {
+              swal("Realizado!", "Se ha compartido el modelo en los grupos indicados", "success")
+              $('#modal-primary').modal('hide');
+          }
+      });
+   }
   </script>
   <!-- /.modal -->
 

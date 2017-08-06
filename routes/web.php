@@ -22,6 +22,8 @@ Route::get('logout', 'UsuarioController@logout');
 
 //TEAM
 Route::resource('app/team', 'TeamController');
+Route::post('/app/team/users/{idTeam}', 'TeamController@updateUsers');
+Route::get('/app/team/users/{idTeam}', 'TeamController@getUsersFromTeam');
 
 //MODELO
 Route::resource('app/model', 'ModelController');

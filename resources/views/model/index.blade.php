@@ -66,6 +66,7 @@
                     <a class="btn btn-table btn-table-red" onclick="deleteModel({!! $modelData->modelId !!}, '{!! $modelData->name !!}')">
                       <i class="fa fa-trash"></i>
                     </a>
+                    
                     <button class="btn btn-table btn-table-green" onclick="editTeams('{!! $modelData->name !!}', {!! $modelData->modelId !!})">
                       <i class="fa fa-group"></i>
                     </button>

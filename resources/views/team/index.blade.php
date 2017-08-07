@@ -115,12 +115,12 @@
         <div class="modal-body">
          
            <form class="">
-              <p><strong for="" class="control-label">Usuarios:</strong></p>
+              <p><strong for="" class="control-label">Emails de usuarios:</strong></p>
 
               <div class="form-group">
                 <select class="form-control" id="input-update" multiple="multiple" style="width: 100%">
-                  @foreach($teams as $team)
-                    <option value="{{ $team->id }}">{{ $team->name }}</option>
+                  @foreach($users as $user)
+                    <option value="{{ $user->id }}">{{ $user->email }}</option>
                   @endforeach
                 </select>
               </div>
@@ -130,7 +130,7 @@
         </div>
         <div class="modal-footer">
            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary">Guardar</button>
+            <button type="button" class="btn btn-primary" onclick="updateUsers()">Guardar</button>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -166,11 +166,11 @@
       
       $.ajax({
           url: 'team/users/' + idTeam,
-          data: {teams: valueEdit},
+          data: {users: valueEdit},
           headers: {'X-CSRF-TOKEN': $('#token').val()},
           type: 'POST',
           success: function(result) {
-              swal("Realizado!", "Se ha compartido el modelo en los grupos indicados", "success")
+              swal("Realizado!", "Se han agregado los usuarios al equipo indicado.", "success")
               $('#modal-primary').modal('hide');
           }
       });

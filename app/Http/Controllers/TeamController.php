@@ -4,6 +4,7 @@ namespace FMxx\Http\Controllers;
 
 use Illuminate\Http\Request;
 use FMxx\Team;
+use FMxx\User;
 use Auth;
 
 class TeamController extends Controller
@@ -17,7 +18,10 @@ class TeamController extends Controller
     {
        //CAMBIAR: listar solo los que pertenecen al usuario 
        $teams = Team::all();	
-       return view('team.index', compact('teams'));
+
+       $users = User::all();
+
+       return view('team.index', compact('teams', 'users'));
     }
 
     /**
@@ -56,5 +60,22 @@ class TeamController extends Controller
         }
 
         return response()->json(["ids" => $ids]);
+    }
+
+    public function updateUsers(Request $request, $id){
+
+        $team = Team::find($id);
+
+        $users = $request['users'];
+
+        $team->users()->detach();
+
+        if ($users != null){
+            foreach ($users as $user) {
+                $team->users()->attach($user);
+            }    
+        }
+
+        return response()->json(["msg" => "realizado  !!"]);
     }
 }

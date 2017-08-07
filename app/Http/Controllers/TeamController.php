@@ -19,7 +19,7 @@ class TeamController extends Controller
        //CAMBIAR: listar solo los que pertenecen al usuario 
        $teams = Team::all();	
 
-       $users = User::all();
+       $users = User::where('id', '<>', Auth::id())->get();
 
        return view('team.index', compact('teams', 'users'));
     }
@@ -72,7 +72,9 @@ class TeamController extends Controller
 
         if ($users != null){
             foreach ($users as $user) {
-                $team->users()->attach($user);
+                if ($user != Auth::id()){
+                    $team->users()->attach($user);
+                }
             }    
         }
 

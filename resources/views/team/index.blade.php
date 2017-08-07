@@ -24,7 +24,7 @@
 
           <div class="row">
             <div class="col-xs-5 box-title-me">
-              <h3 class="box-title">Todos los equipos de trabajo</h3>
+              <h3 class="box-title" id="title-teams">Todos los equipos de trabajo</h3>
             </div>
             <div class="col-xs-7">
               <div class="filtros pull-right">
@@ -65,11 +65,11 @@
             </tr>
             </thead>
             <tbody>
-                @foreach($teams as $team)
+                @foreach($teamsC as $team)
                 <tr>
                   <td><i class="fa fa-group"></i> {{ $team->name }}</td>
-                  <td>{{ $team ->des }}  </td>
-                  <td>adasd</td>
+                  <td>{{ $team->des }}  </td>
+                  <td>{{ $team->creator }}</td>
                   <td class="">
 
                     <a href="{{ url('app/team/show/') }}" class="btn btn-table btn-table-yellow">

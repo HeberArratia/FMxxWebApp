@@ -16,12 +16,27 @@ class TeamController extends Controller
      */
     public function index()
     {
-       //CAMBIAR: listar solo los que pertenecen al usuario 
-       $teams = Team::all();	
+	
+        $teamsC = [];
+        $user = User::find(Auth::id());
 
-       $users = User::where('id', '<>', Auth::id())->get();
+        $teams = $user->teams;
 
-       return view('team.index', compact('teams', 'users'));
+        foreach ($teams as $team) {
+            $newColumn = $team;
+            $currentUser = User::find($team->user_id);
+
+            if ($currentUser->id == Auth::id()){
+               $newColumn['creator'] = "Creado por mi"; 
+            } else {
+              $newColumn['creator'] = $currentUser->email;
+            } 
+            array_push($teamsC, $newColumn);
+        }
+
+        $users = User::where('id', '<>', Auth::id())->get();
+
+        return view('team.index', compact('teamsC', 'users'));
     }
 
     /**
@@ -47,6 +62,8 @@ class TeamController extends Controller
             'name'      => $request['name'],
             'des'       => $request['des'],
         ]);
+
+        $team->users()->attach(Auth::id());
 
         return redirect('/app/team/')->with('msg', "Se ha creado el equipo correctamente");
     }
@@ -77,6 +94,8 @@ class TeamController extends Controller
                 }
             }    
         }
+
+        $team->users()->attach(Auth::id());
 
         return response()->json(["msg" => "realizado  !!"]);
     }

@@ -26,7 +26,7 @@ $(function () {
     })
 
 
-    table.columns( 1 ).search("").draw();
+    table.columns( 2 ).search("").draw();
     $('#filter-todos').addClass('btn-primary');
     $('#filter-todos').removeClass('btn-default');
 
@@ -37,7 +37,7 @@ $(function () {
     $('#filter-miembro').removeClass('btn-primary');
 
     $('body').on( 'click', '#filter-todos', function () {
-      table.columns( 1 ).search("").draw();
+      table.columns( 2 ).search("").draw();
       $('#filter-todos').addClass('btn-primary');
       $('#filter-todos').removeClass('btn-default');
 
@@ -46,9 +46,10 @@ $(function () {
       
       $('#filter-miembro').addClass('btn-default');
       $('#filter-miembro').removeClass('btn-primary');
+      $('#title-teams').text('Todos los equipos de trabajo');
     } );
     $('body').on( 'click', '#filter-creados', function () {
-      table.columns( 1 ).search("Internet Explorer 4.0").draw();
+      table.columns( 2 ).search("Creado por mi").draw();
       $('#filter-creados').addClass('btn-primary');
       $('#filter-creados').removeClass('btn-default');
 
@@ -57,9 +58,10 @@ $(function () {
       
       $('#filter-miembro').addClass('btn-default');
       $('#filter-miembro').removeClass('btn-primary');
+      $('#title-teams').text('Equipos creados por mi');
     } );
     $('body').on( 'click', '#filter-miembro', function () {
-      //table.columns( 1 ).search("Internet Explorer 4.0").draw();
+      table.columns( 2 ).search("@").draw();
       $('#filter-miembro').addClass('btn-primary');
       $('#filter-miembro').removeClass('btn-default');
 
@@ -68,5 +70,6 @@ $(function () {
       
       $('#filter-creados').addClass('btn-default');
       $('#filter-creados').removeClass('btn-primary');
+      $('#title-teams').text('Equipos en que soy miembro');
     } );
   })

@@ -76,18 +76,25 @@
                       <i class="fa fa-eye"></i>
                     </a>
                   
-                    <a href="{{ url('app/team/'.'algo'.'/edit') }}" class="btn btn-table btn-table-blue">
+                    @if ($team->user_id == Auth::id())
+                      <a href="{{ url('app/team/'.'algo'.'/edit') }}" class="btn btn-table btn-table-blue">
                       <i class="fa fa-edit"></i>
-                    </a>
+                      </a>
 
-                    <button class="btn btn-table btn-table-green" onclick="editUsers('{!! $team->name !!}', {!! $team->id !!})">
-                      <i class="fa fa-user-plus"></i>
-                    </button>
-             
+                      <button class="btn btn-table btn-table-green" onclick="editUsers('{!! $team->name !!}', {!! $team->id !!})">
+                        <i class="fa fa-user-plus"></i>
+                      </button>
 
-                    <a class="btn btn-table btn-table-red" onclick="deleteTeam()">
-                      <i class="fa fa-trash"></i>
-                    </a>
+                      <a class="btn btn-table btn-table-red" onclick="deleteTeam()">
+                        <i class="fa fa-trash"></i>
+                      </a>
+                    @else
+                       <a class="btn btn-table btn-table-red" onclick="exitTeam()">
+                        <i class="fa fa-sign-out"></i>
+                      </a> 
+                    @endif
+
+                    
                   </td>
                 </tr>
               @endforeach

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use FMxx\Model as Modelo;
 use FMxx\ModelData;
 use FMxx\Team;
+use FMxx\User;
 use Auth;
 
 class ModelController extends Controller
@@ -31,7 +32,9 @@ class ModelController extends Controller
             array_push($modelDatas, $newColumn);
         }
 
-        $teams = Team::all();   
+        $user = User::find(Auth::id());
+
+        $teams = $user->teams;   
 
         return view('model.index', compact('modelDatas', 'models', 'teams'));
     }

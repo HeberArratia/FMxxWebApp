@@ -81,7 +81,7 @@ class TeamController extends Controller
 
     public function updateUsers(Request $request, $id){
 
-        $team = Team::find($id);
+        /*$team = Team::find($id);
 
         $users = $request['users'];
 
@@ -95,7 +95,7 @@ class TeamController extends Controller
             }    
         }
 
-        $team->users()->attach(Auth::id());
+        $team->users()->attach(Auth::id());*/
 
         return response()->json(["msg" => "realizado  !!"]);
     }

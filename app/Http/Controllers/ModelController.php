@@ -222,6 +222,10 @@ class ModelController extends Controller
 
         $teamsUpdate = $request['teams'];
 
+        if ($teamsUpdate == null){
+             $teamsUpdate = [];
+        }
+
         //elimina los equipos que no vengan
         foreach ($teams as $team) {
             $flag = false;
@@ -251,7 +255,6 @@ class ModelController extends Controller
                 $model->teams()->attach($teamU);
             }
         }   
-
 
 
         return response()->json(["msg" => "realizado  !!"]);

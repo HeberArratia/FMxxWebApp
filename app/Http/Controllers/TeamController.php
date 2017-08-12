@@ -97,6 +97,50 @@ class TeamController extends Controller
 
         $team->users()->attach(Auth::id());*/
 
+        //algoritmo optimizado:
+
+        $team = Team::find($id);
+
+        $users = $team->users;
+
+        $usersUpdate = $request['users'];
+
+        if ($usersUpdate == null){
+             $usersUpdate = [];
+        }
+
+        array_push($usersUpdate, Auth::id());
+
+        //elimina los usuarios que no vengan
+        foreach ($users as $user) {
+            $flag = false;
+            foreach ($usersUpdate as $userU) {
+                if ($user->id == $userU){
+                    //si viene, seteamos flag
+                    $flag = true;
+                }
+            }
+            // si no viene, lo eliminamos
+            if (!$flag){
+                $team->users()->detach($user->id);
+            }
+        } 
+
+        //agrega los usuarios que vengan
+        foreach ($usersUpdate as $userU) {
+            $flag = false;
+            foreach ($users as $user) {
+                if ($userU == $user->id){
+                    // Si el que viene esta, true
+                    $flag = true;
+                }
+            }
+            // si no esta
+            if (!$flag){
+                $team->users()->attach($userU);
+            }
+        }   
+
         return response()->json(["msg" => "realizado  !!"]);
     }
 }

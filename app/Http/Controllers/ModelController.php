@@ -218,7 +218,7 @@ class ModelController extends Controller
 
         $model = Modelo::find($id);
 
-        $teams = Modelo::find($id)->teams;
+        $teams = $model->teams;
 
         $teamsUpdate = $request['teams'];
 

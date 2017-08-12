@@ -202,7 +202,7 @@ class ModelController extends Controller
 
     public function updateTeams(Request $request, $id){
 
-        $model = Modelo::find($id);
+        /*$model = Modelo::find($id);
 
         $teams = $request['teams'];
 
@@ -212,7 +212,47 @@ class ModelController extends Controller
             foreach ($teams as $team) {
                 $model->teams()->attach($team);
             }    
-        }
+        }*/
+
+        //verdadero algoritmo
+
+        $model = Modelo::find($id);
+
+        $teams = Modelo::find($id)->teams;
+
+        $teamsUpdate = $request['teams'];
+
+        //elimina los equipos que no vengan
+        foreach ($teams as $team) {
+            $flag = false;
+            foreach ($teamsUpdate as $teamU) {
+                if ($team->id == $teamU){
+                    //si viene, seteamos flag
+                    $flag = true;
+                }
+            }
+            // si no viene, lo eliminamos
+            if (!$flag){
+                $model->teams()->detach($team->id);
+            }
+        } 
+
+        //agrega los equipos que vengan
+        foreach ($teamsUpdate as $teamU) {
+            $flag = false;
+            foreach ($teams as $team) {
+                if ($teamU == $team->id){
+                    // Si el que viene esta, true
+                    $flag = true;
+                }
+            }
+            // si no esta
+            if (!$flag){
+                $model->teams()->attach($teamU);
+            }
+        }   
+
+
 
         return response()->json(["msg" => "realizado  !!"]);
     }

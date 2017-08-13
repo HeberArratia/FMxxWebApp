@@ -68,6 +68,31 @@ class TeamController extends Controller
         return redirect('/app/team/')->with('msg', "Se ha creado el equipo correctamente");
     }
 
+    public function edit( $id )
+    {
+        $team = Team::find($id);
+
+        return view('team.edit', compact('team'));
+    }
+
+    public function update(Request $request, $id)
+    {
+
+        $this->validate($request, Team::$rules, [], Team::$niceNames);
+
+        $team = Team::find($id);
+        /*$team->fill([
+            'name'      => (string)$request->get( 'name' ),
+            'des'       => (string)$request->get( 'des' ),
+        ]);*/
+
+        $team->name = $request->get( 'name' );
+        $team->des = $request->get( 'des' );
+
+        $team->save();
+        return redirect('/app/team')->with('msg', "Se ha editado correctamente el modelo");
+    } 
+
     public function getUsersFromTeam($id){
         $ids = [];
         $users = Team::find($id)->users;

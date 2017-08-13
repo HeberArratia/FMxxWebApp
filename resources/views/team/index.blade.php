@@ -77,9 +77,10 @@
                     </a>
                   
                     @if ($team->user_id == Auth::id())
-                      <a href="{{ url('app/team/'.'algo'.'/edit') }}" class="btn btn-table btn-table-blue">
-                      <i class="fa fa-edit"></i>
-                      </a>
+
+                       <a href="{{ url('app/team/'.$team->id.'/edit') }}" class="btn btn-table btn-table-blue">
+                        <i class="fa fa-edit"></i>
+                        </a>
 
                       <button class="btn btn-table btn-table-green" onclick="editUsers('{!! $team->name !!}', {!! $team->id !!})">
                         <i class="fa fa-user-plus"></i>

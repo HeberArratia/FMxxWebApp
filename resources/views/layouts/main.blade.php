@@ -179,7 +179,6 @@
 <!-- select2 -->
 {!!Html::script('js/select2.min.js')!!}
 
-
 <script>
   $(function(){
     $('.box-version .box-body').slimScroll({
@@ -188,6 +187,7 @@
         size: '10px',
         alwaysVisible: false
     });
+
 });
 </script>
 </body>

@@ -118,6 +118,15 @@ class TeamController extends Controller
         return response()->json(["ids" => $ids]);
     }
 
+    public function exitTeam($id){
+        
+        $team = Team::find($id);
+
+        $team->users()->detach(Auth::id());
+
+        return response()->json(["msg" => "exit !!"]);
+    }
+
     public function updateUsers(Request $request, $id){
 
         /*$team = Team::find($id);

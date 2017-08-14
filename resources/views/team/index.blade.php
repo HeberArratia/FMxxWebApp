@@ -89,9 +89,9 @@
                       <a class="btn btn-table btn-table-red" onclick="deleteTeam({!! $team->id !!}, '{!! $team->name !!}')">
                         <i class="fa fa-trash"></i>
                       </a>
-                      
+
                     @else
-                       <a class="btn btn-table btn-table-red" onclick="exitTeam()">
+                       <a class="btn btn-table btn-table-red" onclick="exitTeam({!! $team->id !!}, '{!! $team->name !!}')">
                         <i class="fa fa-sign-out"></i>
                       </a> 
                     @endif
@@ -199,6 +199,29 @@
 
         $.ajax({
           url: 'team/' + teamId,
+          headers: {'X-CSRF-TOKEN': $('#token').val()},
+          type: 'DELETE',
+          success: function(result) {
+              window.location.replace("team");
+          }
+        });
+      });
+    }
+
+    function exitTeam(teamId, teamName){
+      swal({
+        title: "Estas seguro?",
+        text: "Se va a retirar del equipo " + teamName,
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Si, retirarme!",
+        closeOnConfirm: false
+      },
+      function(){
+
+        $.ajax({
+          url: 'team/exit/' + teamId,
           headers: {'X-CSRF-TOKEN': $('#token').val()},
           type: 'DELETE',
           success: function(result) {

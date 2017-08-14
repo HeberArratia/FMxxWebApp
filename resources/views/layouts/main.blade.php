@@ -108,9 +108,9 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">Menu principal</li>
 
-        <li class="{{ Request::path() == 'app/model' ? 'active' : '' }}"><a href="/app/model"><i class="fa fa-book"></i> <span> Mi Repositorio</span></a></li>
+        <li class="{{ strpos(Request::path(), 'model') == true ? 'active' : '' }}"><a href="/app/model"><i class="fa fa-book"></i> <span> Mi Repositorio</span></a></li>
 
-        <li class="{{ Request::path() == 'app/team' ? 'active' : '' }}"><a href="/app/team"><i class="fa fa-group"></i> <span> Equpos de trabajo</span></a></li>   
+        <li class="{{ strpos(Request::path(), 'team') == true ? 'active' : '' }}"><a href="/app/team"><i class="fa fa-group"></i> <span> Equpos de trabajo</span></a></li>   
       </ul>
     </section>
     <!-- /.sidebar -->

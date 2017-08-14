@@ -62,14 +62,15 @@
                     <a href="{{ url('app/model/'.$modelData->modelId.'/edit') }}" class="btn btn-table btn-table-blue">
                       <i class="fa fa-edit"></i>
                     </a>
+ 
+                    <button class="btn btn-table btn-table-green" onclick="editTeams('{!! $modelData->name !!}', {!! $modelData->modelId !!})">
+                      <i class="fa fa-group"></i>
+                    </button>
 
                     <a class="btn btn-table btn-table-red" onclick="deleteModel({!! $modelData->modelId !!}, '{!! $modelData->name !!}')">
                       <i class="fa fa-trash"></i>
                     </a>
-                    
-                    <button class="btn btn-table btn-table-green" onclick="editTeams('{!! $modelData->name !!}', {!! $modelData->modelId !!})">
-                      <i class="fa fa-group"></i>
-                    </button>
+
                   </td>
                 </tr>
               @endforeach
@@ -164,7 +165,7 @@
       //swal("Es: " + modelId);
       swal({
         title: "Estas seguro?",
-        text: "Se va a eliminar " + modelName + " y todas sus versiones de manera permanente",
+        text: "Se va a eliminar " + modelName + " y todas sus versiones de forma permanente",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",

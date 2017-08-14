@@ -86,9 +86,10 @@
                         <i class="fa fa-user-plus"></i>
                       </button>
 
-                      <a class="btn btn-table btn-table-red" onclick="deleteTeam()">
+                      <a class="btn btn-table btn-table-red" onclick="deleteTeam({!! $team->id !!}, '{!! $team->name !!}')">
                         <i class="fa fa-trash"></i>
                       </a>
+                      
                     @else
                        <a class="btn btn-table btn-table-red" onclick="exitTeam()">
                         <i class="fa fa-sign-out"></i>
@@ -183,6 +184,29 @@
           }
       });
    }
+
+   function deleteTeam(teamId, teamName){
+      swal({
+        title: "Estas seguro?",
+        text: "Se va a eliminar " + teamName + " de manera permanente",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Si, eliminalo!",
+        closeOnConfirm: false
+      },
+      function(){
+
+        $.ajax({
+          url: 'team/' + teamId,
+          headers: {'X-CSRF-TOKEN': $('#token').val()},
+          type: 'DELETE',
+          success: function(result) {
+              window.location.replace("team");
+          }
+        });
+      });
+    }
   </script>
   <!-- /.modal -->
 

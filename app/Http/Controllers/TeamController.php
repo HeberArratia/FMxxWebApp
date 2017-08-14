@@ -93,6 +93,20 @@ class TeamController extends Controller
         return redirect('/app/team')->with('msg', "Se ha editado correctamente el modelo");
     } 
 
+
+    public function destroy( $id )
+    {
+        $team = Team::find($id);
+
+        $team->users()->detach();
+
+        $team->models()->detach();
+        
+        $team->destroy($id);
+
+        return response()->json(["msg" => "realizado !"]);
+    }
+
     public function getUsersFromTeam($id){
         $ids = [];
         $users = Team::find($id)->users;

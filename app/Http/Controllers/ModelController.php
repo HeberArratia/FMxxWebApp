@@ -99,19 +99,23 @@ class ModelController extends Controller
 
         $model = Modelo::find($idModel);
 
-        $datas = $model->model_datas->reverse();
+        if ($model->user_id == Auth::id()){
 
-        $count = $datas->count();
+            $datas = $model->model_datas->reverse();
 
-        $currentData = null;
+            $count = $datas->count();
 
-        if ($idDes == 0){
-            $currentData = $datas->first();
-        } else {
-            $currentData = $datas->find($idDes);
-        }
+            $currentData = null;
+
+            if ($idDes == 0){
+                $currentData = $datas->first();
+            } else {
+                $currentData = $datas->find($idDes);
+            }
         
         return view('model.show', compact('model', 'datas', 'currentData', 'count'));
+        }
+        return redirect('/app');
     }
 
 
@@ -126,11 +130,15 @@ class ModelController extends Controller
     {
         $model = Modelo::find($id);
 
-        $modelId = $id;
+        if ($model->user_id == Auth::id()){
 
-        $modelData = $model->model_datas->last();
+            $modelId = $id;
 
-        return view('model.edit', compact('modelData', 'modelId'));
+            $modelData = $model->model_datas->last();
+
+            return view('model.edit', compact('modelData', 'modelId'));
+        }
+        return redirect('/app');
     }
 
     /**
@@ -150,17 +158,22 @@ class ModelController extends Controller
 
         $model = Modelo::find($id);
 
-        $modelDataID = ModelData::create([
-            'name' => $request['name'],
-            'des' => $request['des'],
-            'path' => $nameImg,
-        ])->id;
+        if ($model->user_id == Auth::id()){
 
-        \Storage::disk('local')->put($nameImg, \File::get($request['path']));
+            $modelDataID = ModelData::create([
+                'name' => $request['name'],
+                'des' => $request['des'],
+                'path' => $nameImg,
+            ])->id;
 
-        $model->model_datas()->attach($modelDataID);
+            \Storage::disk('local')->put($nameImg, \File::get($request['path']));
 
-        return redirect('/app/model')->with('msg', "Se ha creado una nueva versión del modelo");
+            $model->model_datas()->attach($modelDataID);
+
+            return redirect('/app/model')->with('msg', "Se ha creado una nueva versión del modelo");
+
+        }
+        return redirect('/app');
     }    
 
     /**
@@ -174,19 +187,23 @@ class ModelController extends Controller
     {
         $model = Modelo::find($id);
 
-        $datas = $model->model_datas;
+        if ($model->user_id == Auth::id()){
 
-        foreach ($datas as $data) {
-            $data->delete();
+            $datas = $model->model_datas;
+
+            foreach ($datas as $data) {
+                $data->delete();
+            }
+
+            $model->teams()->detach();
+
+            $model->model_datas()->detach();
+            
+            $model->destroy($id);
+
+            return response()->json(["msg" => "realizado"]);
         }
-
-        $model->teams()->detach();
-
-        $model->model_datas()->detach();
-        
-        $model->destroy($id);
-
-        return response()->json(["msg" => "una cosa yo sé, tu id: ".$id]);
+        return response()->json(["msg" => "error"]);
     }
 
     public function getTeamsFromModel($id){
@@ -218,45 +235,49 @@ class ModelController extends Controller
 
         $model = Modelo::find($id);
 
-        $teams = $model->teams;
+        if ($model->user_id == Auth::id()){
 
-        $teamsUpdate = $request['teams'];
+            $teams = $model->teams;
 
-        if ($teamsUpdate == null){
-             $teamsUpdate = [];
-        }
+            $teamsUpdate = $request['teams'];
 
-        //elimina los equipos que no vengan
-        foreach ($teams as $team) {
-            $flag = false;
-            foreach ($teamsUpdate as $teamU) {
-                if ($team->id == $teamU){
-                    //si viene, seteamos flag
-                    $flag = true;
-                }
+            if ($teamsUpdate == null){
+                 $teamsUpdate = [];
             }
-            // si no viene, lo eliminamos
-            if (!$flag){
-                $model->teams()->detach($team->id);
-            }
-        } 
 
-        //agrega los equipos que vengan
-        foreach ($teamsUpdate as $teamU) {
-            $flag = false;
+            //elimina los equipos que no vengan
             foreach ($teams as $team) {
-                if ($teamU == $team->id){
-                    // Si el que viene esta, true
-                    $flag = true;
+                $flag = false;
+                foreach ($teamsUpdate as $teamU) {
+                    if ($team->id == $teamU){
+                        //si viene, seteamos flag
+                        $flag = true;
+                    }
                 }
-            }
-            // si no esta
-            if (!$flag){
-                $model->teams()->attach($teamU);
-            }
+                // si no viene, lo eliminamos
+                if (!$flag){
+                    $model->teams()->detach($team->id);
+                }
+            } 
+
+            //agrega los equipos que vengan
+            foreach ($teamsUpdate as $teamU) {
+                $flag = false;
+                foreach ($teams as $team) {
+                    if ($teamU == $team->id){
+                        // Si el que viene esta, true
+                        $flag = true;
+                    }
+                }
+                // si no esta
+                if (!$flag){
+                    $model->teams()->attach($teamU);
+                }
+            }   
+
+
+            return response()->json(["msg" => "realizado  !!"]);
         }   
-
-
-        return response()->json(["msg" => "realizado  !!"]);
+        return response()->json(["msg" => "error"]);    
     }
 }

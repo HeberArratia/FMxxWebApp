@@ -29,20 +29,7 @@
     <small></small>
   </h1>
   <p>{!! $currentData->des !!}</p>
-  <div class="acciones-ver">
-
-     <a href="{{ url('app/model/'.$model->id.'/edit') }}" class="btn btn-table btn-table-blue">
-      <i class="fa fa-edit"></i>
-    </a>
-
-    <a class="btn btn-table btn-table-red">
-      <i class="fa fa-trash"></i>
-    </a>
-    <a class="btn btn-table btn-table-green">
-      <i class="fa fa-group"></i>
-    </a>
-              
-  </div>
+  
 </section>
 
 <!-- Main content -->
@@ -82,7 +69,7 @@
 
     </div>
   </div>
-
+  <!--
   <div class="row">
   	
     <div class="col-xs-12">
@@ -95,13 +82,13 @@
 				Aquí van los comentarios
 
           </div>
-        <!-- /.box-body -->
+
       </div>
     </div>
-    <!-- /.col -->
+
 
   </div>
-
+  -->
 </section>
 <!-- /.content -->
 

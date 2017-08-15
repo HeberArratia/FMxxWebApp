@@ -30,16 +30,13 @@
 <section class="content-header">
 
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">
-        <i class="fa fa-group"></i>
-        {{ $team->name }} | Creado por: {{ $authorName }} ({{ $authorMail }})
-      </a>
-    </div>
-  </div>
-</nav>
+<div >
+  <ol class="breadcrumb">
+    <li><a href="{{ url('app/team/') }}"><i class="fa fa-group"></i> Equipos de trabajo</a></li>
+    <li><a href="{{ url('app/team/'.$team->id) }}">{{ $team->name }}</a></li>
+    <li class="active">{!! $currentData->name !!}</li>
+  </ol>
+</div>
 
   <h1>
     {!! $currentData->name !!}

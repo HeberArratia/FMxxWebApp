@@ -106,7 +106,8 @@
 					        <h3 class="name">{{ $model->name }}</h3>
 					        <p>Creado por: <span class="author">{{ $model->modelAuthor }}</span></p>
 					        <div class="co-btn">
-					        	<a href="#" class="btn btn-primary pull-right" role="button"> <i class="fa fa-eye"></i> Visualizar</a>
+					        	<a href="{{ url('app/team/show/'.$team->id.'/'.$model->modelId) }}" class="btn btn-primary pull-right" role="button"> <i class="fa fa-eye"></i> Visualizar</a>
+
 					        </div>
 					      </div>
 					    </div>

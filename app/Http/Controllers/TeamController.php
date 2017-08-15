@@ -3,6 +3,7 @@
 namespace FMxx\Http\Controllers;
 
 use Illuminate\Http\Request;
+use FMxx\Model as Modelo;
 use FMxx\Team;
 use FMxx\User;
 use Auth;
@@ -83,11 +84,37 @@ class TeamController extends Controller
         $models = [];
         foreach ($modelsParent as $modelParent) {
             $newColumn = $modelParent->model_datas->last();
+            $newColumn['modelId'] = $modelParent->id;
             $newColumn['modelAuthor'] = User::find($modelParent->user_id)->email;
             array_push($models, $newColumn);
         }
 
         return view('team.show', compact('team', 'users', 'models', 'authorName', 'authorMail'));
+    }
+
+    public function showModel($idTeam, $idModel, $idDes = 0){
+
+        $model = Modelo::find($idModel);
+
+        $team = Team::find($idTeam);
+
+        $author = User::find($team->user_id);
+        $authorName = $author->name . " " . $author->lastname;
+        $authorMail = $author->email;
+
+        $datas = $model->model_datas->reverse();
+
+        $count = $datas->count();
+
+        $currentData = null;
+
+        if ($idDes == 0){
+            $currentData = $datas->first();
+        } else {
+            $currentData = $datas->find($idDes);
+        }
+        
+        return view('team.showModel', compact('model', 'team', 'authorName', 'authorMail', 'datas', 'currentData', 'count'));
     }
 
     public function edit( $id )

@@ -25,6 +25,7 @@ Route::resource('app/team', 'TeamController');
 Route::post('/app/team/users/{idTeam}', 'TeamController@updateUsers');
 Route::get('/app/team/users/{idTeam}', 'TeamController@getUsersFromTeam');
 Route::delete('/app/team/exit/{idTeam}', 'TeamController@exitTeam');
+Route::get('/app/team/show/{idTeam}/{idModel}/{idDes?}', 'TeamController@showModel');
 
 //MODELO
 Route::resource('app/model', 'ModelController');

@@ -220,6 +220,12 @@ class TeamController extends Controller
             // si no viene, lo eliminamos
             if (!$flag){
                 $team->users()->detach($user->id);
+                $models = $team->models;
+                foreach ($models as $model) {
+                    if($model->user_id == $user->id){
+                        $team->models()->detach($model->id);
+                    }
+                }
             }
         } 
 

@@ -122,6 +122,10 @@
           <h4 class="modal-title">Agregar usuarios al grupo</h4>
         </div>
         <div class="modal-body">
+
+          <div class="callout callout-info">
+                <p>Al quitar un usuario, también se eliminan sus modelos compartidos en este equipo.</p>
+            </div>
          
            <form class="">
               <p><strong for="" class="control-label">Emails de usuarios:</strong></p>

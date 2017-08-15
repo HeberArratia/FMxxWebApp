@@ -71,7 +71,23 @@ class TeamController extends Controller
     public function show( $id )
     {
 
-        return view('team.show');
+        $team = Team::find($id);
+
+        $users = $team->users;
+
+        $author = User::find($team->user_id);
+        $authorName = $author->name . " " . $author->lastname;
+        $authorMail = $author->email;
+
+        $modelsParent = $team->models;
+        $models = [];
+        foreach ($modelsParent as $modelParent) {
+            $newColumn = $modelParent->model_datas->last();
+            $newColumn['modelAuthor'] = User::find($modelParent->user_id)->email;
+            array_push($models, $newColumn);
+        }
+
+        return view('team.show', compact('team', 'users', 'models', 'authorName', 'authorMail'));
     }
 
     public function edit( $id )

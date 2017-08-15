@@ -75,8 +75,8 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="head-show">
-					<h3>Nombre del equipo </h3>
-					<h6>Creado por: Heber Arratia (heber@mail.cl)</h6>
+					<h3>{{ $team->name }}</h3>
+					<h6>Creado por: {{ $authorName }} ({{ $authorMail }})</h6>
 					<div class="row" id="buscador">
 				     	<div class="col-xs-12">
 				     		<div class="form-group">
@@ -97,44 +97,21 @@
 			<div class="col-md-8">
 				
 				<ul class="list">
+
+					@foreach($models as $model)
 				  	<li class="col-sm-6">
 					    <div class="thumbnail">
-					      <img src="/models/1502510900-dribbble_2.png" alt="...">
+					       <img class="" src="/models/{{ $model->path }}" alt="">
 					      <div class="caption">
-					        <h3 class="name">auto</h3>
-					        <p>Creado por: <span class="author">Heber</span></p>
+					        <h3 class="name">{{ $model->name }}</h3>
+					        <p>Creado por: <span class="author">{{ $model->modelAuthor }}</span></p>
 					        <div class="co-btn">
 					        	<a href="#" class="btn btn-primary pull-right" role="button"> <i class="fa fa-eye"></i> Visualizar</a>
 					        </div>
 					      </div>
 					    </div>
 					  </li>
-
-					  <li class="col-sm-6">
-					    <div class="thumbnail">
-					      <img src="/models/1502510900-dribbble_2.png" alt="...">
-					      <div class="caption">
-					        <h3 class="name">casa</h3>
-					        <p>Creado por: <span class="author">carlos</span></p>
-					        <div class="co-btn">
-					        	<a href="#" class="btn btn-primary pull-right" role="button"> <i class="fa fa-eye"></i> Visualizar</a>
-					        </div>
-					      </div>
-					    </div>
-					  </li>
-
-					  <li class="col-sm-6">
-					    <div class="thumbnail">
-					      <img src="/models/1502510900-dribbble_2.png" alt="...">
-					      <div class="caption">
-					        <h3 class="name">casa</h3>
-					        <p>Creado por: <span class="author">carlos</span></p>
-					        <div class="co-btn">
-					        	<a href="#" class="btn btn-primary pull-right" role="button"> <i class="fa fa-eye"></i> Visualizar</a>
-					        </div>
-					      </div>
-					    </div>
-					  </li>
+					  @endforeach
 
 				  </ul>	
 
@@ -147,7 +124,7 @@
 				        <!-- /.box-header -->
 				        <div class="box-body">
 				       		
-				       		<p>parrafo</p>
+				       		<p>{{ $team->des }}</p>
 
 				        </div>
 			        <!-- /.box-body -->
@@ -159,18 +136,14 @@
 				        </div>
 				        <!-- /.box-header -->
 				        <div class="box-body">
-				       		
+
 				       		<div id="users">
-				       			<span class="user-ind">cddsassa</span>
-				       			<span class="user-ind">cddsa</span>
-				       			<span class="user-ind">cddsa</span>
-				       			<span class="user-ind">cddsa</span>
-				       			<span class="user-ind">cddsa</span>
-				       			<span class="user-ind">cddsa</span>
-				       			<span class="user-ind">cddsa</span>
-				       			<span class="user-ind">cddsa</span>
-				       			<span class="user-ind">cddsa</span>
-				       			<span class="user-ind">cddsa</span>
+
+				       			@foreach($users as $user)
+
+				       				<span class="user-ind">{{ $user->email }}</span>
+				       			
+				       			 @endforeach
 				       		</div>
 
 				        </div>

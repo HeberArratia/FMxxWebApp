@@ -173,6 +173,13 @@ class TeamController extends Controller
 
         $team->users()->detach(Auth::id());
 
+        $models = $team->models;
+        foreach ($models as $model) {
+            if($model->user_id == Auth::id()){
+                $team->models()->detach($model->id);
+            }
+        }
+
         return response()->json(["msg" => "exit !!"]);
     }
 

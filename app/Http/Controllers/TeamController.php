@@ -72,75 +72,107 @@ class TeamController extends Controller
     public function show( $id )
     {
 
+        //validar que lo pueda ver solo si lo cree o pertenezco http://127.0.0.1:8000/app/team/8
+
         $team = Team::find($id);
 
-        $users = $team->users;
 
-        $author = User::find($team->user_id);
-        $authorName = $author->name . " " . $author->lastname;
-        $authorMail = $author->email;
+        if ($this->validateAccess($team->id)){
+            $users = $team->users;
 
-        $modelsParent = $team->models;
-        $models = [];
-        foreach ($modelsParent as $modelParent) {
-            $newColumn = $modelParent->model_datas->last();
-            $newColumn['modelId'] = $modelParent->id;
-            $newColumn['modelAuthor'] = User::find($modelParent->user_id)->email;
-            array_push($models, $newColumn);
+            $author = User::find($team->user_id);
+            $authorName = $author->name . " " . $author->lastname;
+            $authorMail = $author->email;
+
+            $modelsParent = $team->models;
+            $models = [];
+            foreach ($modelsParent as $modelParent) {
+                $newColumn = $modelParent->model_datas->last();
+                $newColumn['modelId'] = $modelParent->id;
+                $newColumn['modelAuthor'] = User::find($modelParent->user_id)->email;
+                array_push($models, $newColumn);
+            }
+
+            return view('team.show', compact('team', 'users', 'models', 'authorName', 'authorMail'));
         }
-
-        return view('team.show', compact('team', 'users', 'models', 'authorName', 'authorMail'));
+        return redirect('/app/team');
     }
 
     public function showModel($idTeam, $idModel, $idDes = 0){
 
-        $model = Modelo::find($idModel);
-
         $team = Team::find($idTeam);
 
-        
-        $modelAuthor = User::find($model->user_id);
-        $modelAuthorName = $modelAuthor->name . " " . $modelAuthor->lastname;
-        $modelAuthorMail = $modelAuthor->email;
+        if ($this->validateAccess($team->id)){
 
-        $datas = $model->model_datas->reverse();
+            $models = $team->models;
+            $model = Modelo::find($idModel);
 
-        $count = $datas->count();
+            //validamos que modelo se encuentre en team
+            $flag = false;
+            foreach ($models as $m) {
+                if ($m->id == $model->id){
+                    $flag = true;
+                    break;
+                }
+            }
 
-        $currentData = null;
+            if($flag){
 
-        if ($idDes == 0){
-            $currentData = $datas->first();
-        } else {
-            $currentData = $datas->find($idDes);
-        }
-        
-        return view('team.showModel', compact('model', 'team', 'datas', 'modelAuthorName', 'modelAuthorMail','currentData', 'count'));
+                $modelAuthor = User::find($model->user_id);
+                $modelAuthorName = $modelAuthor->name . " " . $modelAuthor->lastname;
+                $modelAuthorMail = $modelAuthor->email;
+
+                $datas = $model->model_datas->reverse();
+
+                $count = $datas->count();
+
+                $currentData = null;
+
+                if ($idDes == 0){
+                    $currentData = $datas->first();
+                } else {
+                    $currentData = $datas->find($idDes);
+                }
+                
+                return view('team.showModel', compact('model', 'team', 'datas', 'modelAuthorName', 'modelAuthorMail','currentData', 'count'));
+            } 
+          return redirect('/app/team'); 
+        } 
+        return redirect('/app/team');
     }
 
     public function edit( $id )
     {
         $team = Team::find($id);
 
-        return view('team.edit', compact('team'));
+        //valido que el team sea del propiedad del usuario
+        if ($team->user_id == Auth::id()){
+
+            return view('team.edit', compact('team'));
+        }
+        return redirect('/app/team');
     }
 
     public function update(Request $request, $id)
     {
-
         $this->validate($request, Team::$rules, [], Team::$niceNames);
 
         $team = Team::find($id);
-        /*$team->fill([
-            'name'      => (string)$request->get( 'name' ),
-            'des'       => (string)$request->get( 'des' ),
-        ]);*/
 
-        $team->name = $request->get( 'name' );
-        $team->des = $request->get( 'des' );
+        if ($team->user_id == Auth::id()){
+            
+            /*$team->fill([
+                'name'      => (string)$request->get( 'name' ),
+                'des'       => (string)$request->get( 'des' ),
+            ]);*/
 
-        $team->save();
-        return redirect('/app/team')->with('msg', "Se ha editado correctamente el modelo");
+            $team->name = $request->get( 'name' );
+            $team->des = $request->get( 'des' );
+
+            $team->save();
+            return redirect('/app/team')->with('msg', "Se ha editado correctamente el modelo");
+        }
+        return redirect('/app/team');
     } 
 
 
@@ -148,13 +180,17 @@ class TeamController extends Controller
     {
         $team = Team::find($id);
 
-        $team->users()->detach();
+        if ($team->user_id == Auth::id()){
 
-        $team->models()->detach();
-        
-        $team->destroy($id);
+            $team->users()->detach();
 
-        return response()->json(["msg" => "realizado !"]);
+            $team->models()->detach();
+            
+            $team->destroy($id);
+
+            return response()->json(["msg" => "realizado !"]);
+        }
+        return response()->json(["msg" => "error"]);
     }
 
     public function getUsersFromTeam($id){
@@ -172,16 +208,20 @@ class TeamController extends Controller
         
         $team = Team::find($id);
 
-        $team->users()->detach(Auth::id());
+        if($this->validateAccess($team->id)){
 
-        $models = $team->models;
-        foreach ($models as $model) {
-            if($model->user_id == Auth::id()){
-                $team->models()->detach($model->id);
+            $team->users()->detach(Auth::id());
+
+            $models = $team->models;
+            foreach ($models as $model) {
+                if($model->user_id == Auth::id()){
+                    $team->models()->detach($model->id);
+                }
             }
-        }
 
-        return response()->json(["msg" => "exit !!"]);
+            return response()->json(["msg" => "exit !!"]);
+        }
+        return response()->json(["msg" => "error"]);
     }
 
     public function updateUsers(Request $request, $id){
@@ -206,52 +246,72 @@ class TeamController extends Controller
 
         $team = Team::find($id);
 
-        $users = $team->users;
+        if ($team->user_id == Auth::id()){
 
-        $usersUpdate = $request['users'];
+            $users = $team->users;
 
-        if ($usersUpdate == null){
-             $usersUpdate = [];
-        }
+            $usersUpdate = $request['users'];
 
-        array_push($usersUpdate, Auth::id());
-
-        //elimina los usuarios que no vengan
-        foreach ($users as $user) {
-            $flag = false;
-            foreach ($usersUpdate as $userU) {
-                if ($user->id == $userU){
-                    //si viene, seteamos flag
-                    $flag = true;
-                }
+            if ($usersUpdate == null){
+                 $usersUpdate = [];
             }
-            // si no viene, lo eliminamos
-            if (!$flag){
-                $team->users()->detach($user->id);
-                $models = $team->models;
-                foreach ($models as $model) {
-                    if($model->user_id == $user->id){
-                        $team->models()->detach($model->id);
+
+            array_push($usersUpdate, Auth::id());
+
+            //elimina los usuarios que no vengan
+            foreach ($users as $user) {
+                $flag = false;
+                foreach ($usersUpdate as $userU) {
+                    if ($user->id == $userU){
+                        //si viene, seteamos flag
+                        $flag = true;
                     }
                 }
-            }
-        } 
-
-        //agrega los usuarios que vengan
-        foreach ($usersUpdate as $userU) {
-            $flag = false;
-            foreach ($users as $user) {
-                if ($userU == $user->id){
-                    // Si el que viene esta, true
-                    $flag = true;
+                // si no viene, lo eliminamos
+                if (!$flag){
+                    $team->users()->detach($user->id);
+                    $models = $team->models;
+                    foreach ($models as $model) {
+                        if($model->user_id == $user->id){
+                            $team->models()->detach($model->id);
+                        }
+                    }
                 }
-            }
-            // si no esta
-            if (!$flag){
-                $team->users()->attach($userU);
-            }
-        }   
+            } 
 
-        return response()->json(["msg" => "realizado  !!"]);
+            //agrega los usuarios que vengan
+            foreach ($usersUpdate as $userU) {
+                $flag = false;
+                foreach ($users as $user) {
+                    if ($userU == $user->id){
+                        // Si el que viene esta, true
+                        $flag = true;
+                    }
+                }
+                // si no esta
+                if (!$flag){
+                    $team->users()->attach($userU);
+                }
+            }   
+
+            return response()->json(["msg" => "realizado  !!"]);
+        }
+        return response()->json(["msg" => "error"]);
+    }
+
+    private function validateAccess($idTeam){
+        $user = User::find(Auth::id());
+        $flag = false;
+        $teams = $user->teams;
+        foreach ($teams as $t) {
+            if ($t->id == $idTeam){
+                $flag = true;
+                break;
+            }
+        }
+        if ($flag){
+            return true;
+        }
+        return false;
     }
 }

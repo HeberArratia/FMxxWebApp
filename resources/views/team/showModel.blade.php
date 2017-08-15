@@ -43,6 +43,7 @@
     <small></small>
   </h1>
   <p>{!! $currentData->des !!}</p>
+  <p><strong>Creado por:</strong>  {{ $modelAuthorName }} ({{ $modelAuthorMail }})</p>
 
 </section>
 

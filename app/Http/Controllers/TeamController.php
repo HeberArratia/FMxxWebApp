@@ -98,9 +98,10 @@ class TeamController extends Controller
 
         $team = Team::find($idTeam);
 
-        $author = User::find($team->user_id);
-        $authorName = $author->name . " " . $author->lastname;
-        $authorMail = $author->email;
+        
+        $modelAuthor = User::find($model->user_id);
+        $modelAuthorName = $modelAuthor->name . " " . $modelAuthor->lastname;
+        $modelAuthorMail = $modelAuthor->email;
 
         $datas = $model->model_datas->reverse();
 
@@ -114,7 +115,7 @@ class TeamController extends Controller
             $currentData = $datas->find($idDes);
         }
         
-        return view('team.showModel', compact('model', 'team', 'authorName', 'authorMail', 'datas', 'currentData', 'count'));
+        return view('team.showModel', compact('model', 'team', 'datas', 'modelAuthorName', 'modelAuthorMail','currentData', 'count'));
     }
 
     public function edit( $id )

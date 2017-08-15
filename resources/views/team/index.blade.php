@@ -72,7 +72,7 @@
                   <td>{{ $team->creator }}</td>
                   <td class="">
 
-                    <a href="{{ url('app/team/show/') }}" class="btn btn-table btn-table-yellow">
+                    <a href="{{ url('app/team/'.$team->id) }}" class="btn btn-table btn-table-yellow">
                       <i class="fa fa-eye"></i>
                     </a>
                   

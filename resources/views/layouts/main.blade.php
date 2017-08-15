@@ -110,7 +110,7 @@
 
         <li class="{{ strpos(Request::path(), 'model') == true ? 'active' : '' }}"><a href="/app/model"><i class="fa fa-book"></i> <span> Mi Repositorio</span></a></li>
 
-        <li class="{{ strpos(Request::path(), 'team') == true ? 'active' : '' }}"><a href="/app/team"><i class="fa fa-group"></i> <span> Equpos de trabajo</span></a></li>   
+        <li class="{{ strpos(Request::path(), 'team') == true ? 'active' : '' }}"><a href="/app/team"><i class="fa fa-group"></i> <span> Equipos de trabajo</span></a></li>   
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -178,7 +178,8 @@
 {!!Html::script('js/sweetalert.min.js')!!}
 <!-- select2 -->
 {!!Html::script('js/select2.min.js')!!}
-
+<!-- listjs -->
+{!!Html::script('js/list.js')!!}
 <script>
   $(function(){
     $('.box-version .box-body').slimScroll({
@@ -189,6 +190,12 @@
     });
 
 });
+
+  var options = {
+      valueNames: [ 'name', 'author' ]
+  };
+
+  var userList = new List('models', options)
 </script>
 </body>
 </html>

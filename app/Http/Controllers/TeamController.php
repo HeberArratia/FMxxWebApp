@@ -68,6 +68,12 @@ class TeamController extends Controller
         return redirect('/app/team/')->with('msg', "Se ha creado el equipo correctamente");
     }
 
+    public function show( $id )
+    {
+
+        return view('team.show');
+    }
+
     public function edit( $id )
     {
         $team = Team::find($id);

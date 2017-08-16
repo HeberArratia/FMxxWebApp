@@ -106,7 +106,9 @@ sudo apt-get install unzip
 
 En la ruta "/var/www/html"
 
+```
 git clone https://github.com/HeberArratia/FMxxWebApp.git
+```
 
 Ejecutar sobre el proyecto clonado:
 

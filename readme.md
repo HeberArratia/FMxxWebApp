@@ -108,7 +108,7 @@ En la ruta "/var/www/html"
 
 ```
 git clone https://github.com/HeberArratia/FMxxWebApp.git
-``
+```
 
 Ejecutar sobre el proyecto clonado:
 
@@ -197,8 +197,6 @@ sudo chmod -R 777 laravel
 Es importante configurar en este archivos los datos de conexión con nuestra base de datos.
 
 #### Migraciones
-
-Migrar la base de datos.
 
 ```
 php artisan migrate

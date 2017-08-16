@@ -13,6 +13,7 @@
 
 //FRONTPAGE
 Route::get('/', 'FrontController@home');
+Route::post('/contactar', ['as' => 'front.contactar', 'uses' => 'FrontController@contactar']);
 
 //USUARIO
 Route::resource('app/user', 'UsuarioController');

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/pin.css">
     <link rel="stylesheet" href="css/slicknav.min.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
     <title>FMxx</title>
   </head>
@@ -122,21 +123,23 @@
 
       <div id="form-c" class="ed-container">
         <div class="ed-item web-100 base-100">
-          <form>
+      
             <label for="name">TU NOMBRE (REQUERIDO)</label>
-            <input type="text" id="inputNombre" name="name" placeholder="Ej: Luis Salazar" required>
+            <input type="text" id="inputName" name="name" placeholder="Ej: Luis Salazar" required>
 
             <label for="email">TU EMAIL (REQUERIDO)</label>
             <input type="text" id="inputMail" name="email" placeholder="Ej: luis.salazar@gmail.com" required>
 
             <label for="asunto">ASUNTO</label>
-            <input type="text" id="inputMail" name="asunto" placeholder="Ingresa un asunto" required>
+            <input type="text" id="inputAsunto" name="asunto" placeholder="Ingresa un asunto" required>
 
             <label for="message">TU MENSAJE</label>
-            <textarea id="inputMensaje" name="message" placeholder="Ingresa el mensaje"  required></textarea>
+            <textarea id="inputMsg" name="message" placeholder="Ingresa el mensaje"  required></textarea>
 
-            <button type="submit">ENVIAR</button>
-          </form>
+             <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+
+            <button  onclick="contactar()">ENVIAR</button>
+          
         </div>
       </div>
 
@@ -154,5 +157,51 @@
     <script src="js/jquery.slicknav.min.js"></script>
     <script src="js/jquery.navScroll.min.js"></script>
     <script src="js/scriptsfront.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script>
+      function contactar(){
+        var name = $('#inputName').val();
+        var mail = $('#inputMail').val();
+        var asunto = $('#inputAsunto').val();
+        var msg = $('#inputMsg').val();
+
+        var emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+        if (isBlank(name)){
+          if (isBlank(mail) && emailRegex.test(mail)){
+            if (isBlank(msg)){
+
+
+                $.ajax({
+                  url: 'contactar',
+                  headers: {'X-CSRF-TOKEN': $('#token').val()},
+                  type: 'POST',
+                  data: {name: name, mail: mail, asunto: asunto, msg: msg},
+                  success: function(result) {
+                      console.log(result);
+                      if (result.msg == 1){
+                        swal("Mensaje enviado", "Tu mensaje fue enviado correctamente!", "success");
+                      } else {
+                        swal("Error", "Error al contactar", "error");
+                      }
+                  }
+                });
+
+            } else {
+              swal("Error", "Ingrese un mensaje", "error")
+            }
+          } else {
+            swal("Error", "Ingrese un correo válido", "error")
+          }
+        } else {
+          swal("Error", "El nombre no debe estar vacío", "error")
+        }
+
+      }
+
+      function isBlank(str) {
+        return !(!str || /^\s*$/.test(str));
+      }
+    </script>
   </body>
 </html>

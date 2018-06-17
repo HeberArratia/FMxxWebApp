@@ -219,20 +219,6 @@ class ModelController extends Controller
 
     public function updateTeams(Request $request, $id){
 
-        /*$model = Modelo::find($id);
-
-        $teams = $request['teams'];
-
-        $model->teams()->detach();
-
-        if ($teams != null){
-            foreach ($teams as $team) {
-                $model->teams()->attach($team);
-            }    
-        }*/
-
-        //verdadero algoritmo
-
         $model = Modelo::find($id);
 
         if ($model->user_id == Auth::id()){

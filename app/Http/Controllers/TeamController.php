@@ -160,11 +160,6 @@ class TeamController extends Controller
         $team = Team::find($id);
 
         if ($team->user_id == Auth::id()){
-            
-            /*$team->fill([
-                'name'      => (string)$request->get( 'name' ),
-                'des'       => (string)$request->get( 'des' ),
-            ]);*/
 
             $team->name = $request->get( 'name' );
             $team->des = $request->get( 'des' );
@@ -225,24 +220,6 @@ class TeamController extends Controller
     }
 
     public function updateUsers(Request $request, $id){
-
-        /*$team = Team::find($id);
-
-        $users = $request['users'];
-
-        $team->users()->detach();
-
-        if ($users != null){
-            foreach ($users as $user) {
-                if ($user != Auth::id()){
-                    $team->users()->attach($user);
-                }
-            }    
-        }
-
-        $team->users()->attach(Auth::id());*/
-
-        //algoritmo optimizado:
 
         $team = Team::find($id);
 

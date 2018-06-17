@@ -106,7 +106,7 @@
     <section class="sidebar">
 
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">Menu principal</li>
+        <li class="header">Menú principal</li>
 
         <li class="{{ strpos(Request::path(), 'model') == true ? 'active' : '' }}"><a href="/app/model"><i class="fa fa-book"></i> <span> Mi Repositorio</span></a></li>
 

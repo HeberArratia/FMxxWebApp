@@ -23,7 +23,7 @@
         <div class="box-body">
 
             <div class="callout callout-info">
-                <p>Al editar un modelo, se va a crear una nueva versión de este.</p>
+                <p>Al editar un modelo, se va a crear una nueva versión del mismo.</p>
             </div>
             
             @if(count($errors) > 0)
@@ -64,7 +64,7 @@
 
             <div class="box-footer">
             <a href="/app/model" class="btn btn-default">Volver</a>
-            {!!Form::submit('Crear', ['class'=>'btn btn-primary pull-right'])!!}
+            {!!Form::submit('Modificar', ['class'=>'btn btn-primary pull-right'])!!}
           </div>
 
           {!!Form::close()!!}

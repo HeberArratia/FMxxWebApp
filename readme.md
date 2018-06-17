@@ -2,210 +2,91 @@
 
 ## Acerca de FMxx App
 
-Contiene un landing page que muestra las principales características de FMxx en conjunto con una aplicación construida sobre el framwork Laravel, que permite compartir modelos entre usuarios registrados.
+Contiene:
+
+- Landing page que muestra las principales características de FMxx.
+- Aplicación construida sobre el framework Laravel que permite compartir modelos (en diferentes versiones del mismo) entre usuarios registrados y sus equipos.
 
 ## ¿Qué es FMxx?
 
-Presenta un modelamiento de la variabilidad en lineas de producto de software usando diagramas de características.
+Presenta un modelamiento de la variabilidad en líneas de producto de software usando diagramas de características.
 
 ## Apoya
 
 El proyecto se mantiene a través de el Departamento de Computación e Informática de la Universidad de La Frontera.
 
-## Deploy
+## Herramientas utilizadas
 
-Debe existir el entorno LAMP con todos los paquetes actualizados.
+Básicamente, la aplicación se encuentra construida bajo el framework Laravel 5.3, implicando todas las dependencias propias de tal herramienta. 
 
-### Configurar entorno
+Laravel 5.3 se encuentra bajo la licencia MIT.
 
-#### Actualizar paquetes Ubuntu
+## Instalación
 
-```
-sudo apt-get update
-```
+### Requisitos del servidor
 
-#### Instalar apache
+- PHP between 5.6.4 & 7.1.*
+- OpenSSL PHP Extension
+- PDO PHP Extension
+- Mbstring PHP Extension
+- Tokenizer PHP Extension
+- XML PHP Extension
 
-```
-sudo apt-get install apache2
-```
+### Instalar composer
 
-#### Instalar MySQL con paquetes adicionales
+Seguir instrucciones para la [instalación de composer.](https://getcomposer.org/doc/00-intro.md).
 
-```
-sudo apt-get install mysql-server libapache2-mod-auth-mysql php5-mysql
-```
+### Generar base de datos
 
-#### Acceder a MySQL y crear BD
-
-```
-mysql -u root -p
-create database fmxxdb;
-exit
-```
-
-#### Instalar PHP5 y mcrypt
+De forma predeterminada, la aplicación viene configurada para ser utilizada con el motor de bases de datos MySQL configurado con los siguientes parámetros:
 
 ```
-sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=dbfmxxapp
+DB_USERNAME=root
+DB_PASSWORD=
 ```
 
-#### Instalar curl
+Por lo tanto, es necesario tener funcionando el motor de bases de datos ya habiendo creado la base de datos nombrada "dbfmxxapp".
+
+Estos parámetros pueden ser reconfigurados en el archivo ".env" ubicado en la raíz del proyecto.
+
+* Es posible utilizar otros motores de bases de datos, como lo es PostgreSQL. *
+
+### Instalar dependencias
+
+Posicionados sobre la raíz del proyecto en la terminal, ejecutar:
+
+```composer install```
+
+### Generar base de datos
+
+Para generar la estructura de la base de datos, ejecutar:
+
+```php artisan migrate```
+
+### Generar datos de prueba
+
+Se generarán datos para los usuarios de la aplicación, para ello ejecutar:
+
+```php artisan db:seed```
+
+### Ejecutar la aplicación
+
+Sobre la raíz del proyecto:
 
 ```
-sudo apt-get install php5-curl
+php artisan serve
 ```
 
-#### Instalar Composer vía Curl
+### Deploy
 
-```
-curl -sS http:://getcomposer.org/installer | php
-```
+Para levantar la aplicación en producción, se deben seguir las instrucciones recomendadas dentro de la [documentación de Laravel](https://laravel.com/docs/5.6/deployment).
 
-#### Mover Composer (hacerlo global)
 
-```
-sudo mv composer.phar /usr/local/bin/composer
-```
 
-#### Verificar
 
-```
-cd /var/www/html/
-sudo nano info.php
-
-<?php
-	phpinfo();
-?>
-```
-
-#### Regresar el home
-
-```
-cd /home/username/
-```
-
-#### Activar modulo de sobreescritura
-
-```
-sudo a2enmod rewrite
-service apache 2 restart
-```
-
-#### Instalar UNZIP
-
-```
-sudo apt-get install unzip
-```
-
-### Configurar proyecto
-
-#### Descargar proyecto
-
-**Con git instalado:**
-
-En la ruta "/var/www/html"
-
-```
-git clone https://github.com/HeberArratia/FMxxWebApp.git
-```
-
-Ejecutar sobre el proyecto clonado:
-
-```
-composer install
-```
-
-**Sin git, podemos traer de máquina local:**
-
-En máquina local
-
-```
-scp nombreproyecto.zip user@ip:/hombre/user
-```
-
-En máquina remota.
-Mover proyecto
-
-```
-sudo mv /var/www/html proyecto.zip
-```
-
-Descomprimir
-
-```
-cd /var/www/html
-sudo unzip proyecto.zip
-```
-
-#### Dar permisos a app
-
-```
-sudo chmod -R 755 proyecto
-sudo chmod -R 777 proyecto/storage/
-sudo chmod -R 777 proyecto/public/models
-```
-#### Configurar apache
-
-```
-sudo nano /etc/apache2/sites-enabled/000-default.conf
-```
-
-En document root configuramos la ruta de nuestra app.
-
-```
-DocumentRoot /var/www/html/laravel/public
-```
-
-Creamos directorio
-
-```
-<Directory /var/www/html/laravel/public>
-	AllowOverrride all
-	RewriteEngine on
-	RewriteEngine On
-	ReweiteBase /var/www/html/laravel/public
-</Directory>
-```
-
-Guardamos
-
-Reiniciamos apache
-
-```
-service apache 2 restart
-```
-
-(*) Si error: seguir video
-
-#### Generar nueva llave
-
-Posicionados sobre el proyecto
-
-```
-php artisan key:generate
-```
-
-En caso de error.
-
-```
-sudo chmod -R 777 laravel
-```
-
-#### Configurar .env
-
-Es importante configurar en este archivos los datos de conexión con nuestra base de datos.
-
-#### Migraciones
-
-```
-php artisan migrate
-```
-
-#### Optimizar proyecto
-
-```
-php artisan optimize 
-```
 
 

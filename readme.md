@@ -11,10 +11,6 @@ Contiene:
 
 Presenta un modelamiento de la variabilidad en líneas de producto de software usando diagramas de características.
 
-## Apoya
-
-El proyecto se mantiene a través de el Departamento de Computación e Informática de la Universidad de La Frontera.
-
 ## Herramientas utilizadas
 
 Básicamente, la aplicación se encuentra construida bajo el framework Laravel 5.3, implicando todas las dependencias propias de tal herramienta. 
